@@ -1,54 +1,35 @@
 /**
- * Policy validation hook.
+ * Policy validation hook — DEPRECATED.
  *
- * Runs policy rules against an expense and returns an array of flag reasons.
- * Returns an empty array if the expense passes all policies.
+ * This file originally contained hardcoded stub rules.
+ * It has been superseded by the config-driven violation evaluator engine:
+ *   - src/services/violationEvaluator.js   (rule evaluation)
+ *   - src/services/policy.service.js       (active policy lookup)
  *
- * Designed for extension: add new rule functions to the RULES array.
- * When a policy config model is built later, inject it into the rule functions.
+ * Both travel.service.js and expense.service.js now use the real engine directly.
+ *
+ * This file is retained only for backward compatibility. Do not add new rules here.
  */
 
-// ── Individual rule functions ────────────────────────────────────────────────
-// Each returns a string reason if flagged, or null if passed.
-
-function checkGeneralAmountCap(expense) {
-  if (expense.amount > 5000) {
-    return `Amount ${expense.amount} exceeds general policy cap of 5000`;
-  }
-  return null;
-}
-
-function checkHotelCap(expense) {
-  if (expense.category === 'hotel' && expense.amount > 8000) {
-    return `Hotel expense ${expense.amount} exceeds hotel policy cap of 8000`;
-  }
-  return null;
-}
-
-// ── Rule registry (add new rules here) ───────────────────────────────────────
-
-const RULES = [checkGeneralAmountCap, checkHotelCap];
-
-// ── Public API ───────────────────────────────────────────────────────────────
+const { evaluateExpenseAgainstPolicy } = require('./violationEvaluator');
 
 /**
- * Validate an expense against all policy rules.
- * @param {Object} expense - The expense data (amount, category, etc.)
- * @returns {{ flagged: boolean, reasons: string[] }}
+ * Legacy wrapper. Calls the real engine with null rules (no-op) if called
+ * without a policy. For proper evaluation, use the violation evaluator
+ * with an active policy's rules instead.
+ *
+ * @deprecated Use evaluateExpenseAgainstPolicy from violationEvaluator.js
  */
-function validateExpenseAgainstPolicy(expense) {
-  const reasons = [];
-
-  for (const rule of RULES) {
-    const result = rule(expense);
-    if (result) {
-      reasons.push(result);
-    }
+function validateExpenseAgainstPolicy(expense, rules) {
+  if (!rules) {
+    return { flagged: false, reasons: [], violations: [] };
   }
 
+  const violations = evaluateExpenseAgainstPolicy(expense, rules);
   return {
-    flagged: reasons.length > 0,
-    reasons,
+    flagged: violations.length > 0,
+    reasons: violations.map((v) => v.message),
+    violations,
   };
 }
 
