@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 const routes = require('./routes');
@@ -16,6 +17,9 @@ app.use(cors());
 // Body parsing
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: false }));
+
+// Static file serving for uploaded receipts
+app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
 // Request logging
 app.use(requestLogger);
