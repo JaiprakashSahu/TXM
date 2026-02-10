@@ -211,6 +211,13 @@ class ExpenseService {
   }
 
   /**
+   * List flagged expenses only.
+   */
+  async listFlagged({ pagination }) {
+    return expenseRepository.findFlagged(pagination);
+  }
+
+  /**
    * Get a single expense by ID (owner or admin).
    */
   async getById({ id, actor }) {

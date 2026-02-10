@@ -74,6 +74,24 @@ class ExpenseRepository {
 
     return { docs, total, page, limit, totalPages: Math.ceil(total / limit) };
   }
+
+  async findFlagged({ page, limit }) {
+    const skip = (page - 1) * limit;
+    const filter = { status: 'flagged' };
+
+    const [docs, total] = await Promise.all([
+      Expense.find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .populate('userId', 'name email role')
+        .populate('travelRequestId', 'destination startDate endDate status')
+        .exec(),
+      Expense.countDocuments(filter),
+    ]);
+
+    return { docs, total, page, limit, totalPages: Math.ceil(total / limit) };
+  }
 }
 
 module.exports = new ExpenseRepository();
