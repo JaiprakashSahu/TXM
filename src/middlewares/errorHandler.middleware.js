@@ -1,3 +1,4 @@
+const multer = require('multer');
 const logger = require('../utils/logger');
 const { AppError } = require('../utils/errors');
 
@@ -9,6 +10,18 @@ const errorHandler = (err, _req, res, _next) => {
     return res.status(err.statusCode).json({
       success: false,
       message: err.message,
+    });
+  }
+
+  // Multer file upload errors
+  if (err instanceof multer.MulterError) {
+    const multerMessages = {
+      LIMIT_FILE_SIZE: 'File size exceeds the 5MB limit',
+      LIMIT_UNEXPECTED_FILE: 'Unexpected file field',
+    };
+    return res.status(400).json({
+      success: false,
+      message: multerMessages[err.code] || `Upload error: ${err.message}`,
     });
   }
 
