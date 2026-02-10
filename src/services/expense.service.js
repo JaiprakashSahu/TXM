@@ -2,6 +2,7 @@ const expenseRepository = require('../repositories/expense.repository');
 const travelRequestRepository = require('../repositories/travelRequest.repository');
 const policyService = require('./policy.service');
 const { evaluateExpenseAgainstPolicy } = require('./violationEvaluator');
+const { eventBus, EVENTS } = require('../events/eventBus');
 const {
   BadRequestError,
   NotFoundError,
@@ -136,6 +137,14 @@ class ExpenseService {
       ],
     });
 
+    // Emit domain event if expense was auto-flagged
+    if (status === 'flagged') {
+      eventBus.emitEvent(EVENTS.EXPENSE_FLAGGED, {
+        expense: { ...expense.toObject(), flaggedReason },
+        actor,
+      });
+    }
+
     return expenseRepository.findById(expense._id);
   }
 
@@ -158,6 +167,10 @@ class ExpenseService {
     });
 
     await expenseRepository.save(expense);
+
+    // Emit domain event — fire-and-forget
+    eventBus.emitEvent(EVENTS.EXPENSE_APPROVED, { expense, actor });
+
     return expenseRepository.findById(expense._id);
   }
 

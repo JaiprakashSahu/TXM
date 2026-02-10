@@ -2,6 +2,7 @@ const travelRequestRepository = require('../repositories/travelRequest.repositor
 const userRepository = require('../repositories/user.repository');
 const policyService = require('./policy.service');
 const { evaluateTravelAgainstPolicy } = require('./violationEvaluator');
+const { eventBus, EVENTS } = require('../events/eventBus');
 const {
   BadRequestError,
   NotFoundError,
@@ -162,6 +163,10 @@ class TravelRequestService {
     });
 
     await travelRequestRepository.save(tr);
+
+    // Emit domain event — fire-and-forget
+    eventBus.emitEvent(EVENTS.TRAVEL_SUBMITTED, { travelRequest: tr, actor });
+
     return travelRequestRepository.findById(tr._id);
   }
 
@@ -182,6 +187,10 @@ class TravelRequestService {
     });
 
     await travelRequestRepository.save(tr);
+
+    // Emit domain event — fire-and-forget
+    eventBus.emitEvent(EVENTS.TRAVEL_APPROVED, { travelRequest: tr, actor });
+
     return travelRequestRepository.findById(tr._id);
   }
 
@@ -202,6 +211,10 @@ class TravelRequestService {
     });
 
     await travelRequestRepository.save(tr);
+
+    // Emit domain event — fire-and-forget
+    eventBus.emitEvent(EVENTS.TRAVEL_REJECTED, { travelRequest: tr, actor });
+
     return travelRequestRepository.findById(tr._id);
   }
 

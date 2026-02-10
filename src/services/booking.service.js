@@ -1,6 +1,7 @@
 const bookingRepository = require('../repositories/booking.repository');
 const travelRequestRepository = require('../repositories/travelRequest.repository');
 const inventory = require('./inventoryProvider');
+const { eventBus, EVENTS } = require('../events/eventBus');
 const logger = require('../utils/logger');
 const {
   BadRequestError,
@@ -134,6 +135,9 @@ class BookingService {
       await travelRequestRepository.save(tr);
 
       logger.info(`Booking confirmed: ${booking._id}`);
+
+      // Emit domain event — fire-and-forget
+      eventBus.emitEvent(EVENTS.BOOKING_CONFIRMED, { booking, actor });
     } catch (providerErr) {
       // Failure → compensate
       booking.status = 'failed';
@@ -145,6 +149,13 @@ class BookingService {
       inventory.releaseItem(data.inventoryId);
 
       logger.warn(`Booking failed: ${booking._id} — ${providerErr.message}`);
+
+      // Emit domain event — fire-and-forget
+      eventBus.emitEvent(EVENTS.BOOKING_FAILED, {
+        booking,
+        actor,
+        error: providerErr.message,
+      });
     }
 
     return bookingRepository.findById(booking._id);
