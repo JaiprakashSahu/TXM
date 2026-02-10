@@ -5,8 +5,12 @@ const cors = require('cors');
 const routes = require('./routes');
 const requestLogger = require('./middlewares/requestLogger.middleware');
 const errorHandler = require('./middlewares/errorHandler.middleware');
+const { registerHandlers } = require('./events/eventHandlers');
 
 const app = express();
+
+// Register domain event handlers (fire-and-forget side effects)
+registerHandlers();
 
 // Security headers
 app.use(helmet());
