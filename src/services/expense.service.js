@@ -1,6 +1,7 @@
 const expenseRepository = require('../repositories/expense.repository');
 const travelRequestRepository = require('../repositories/travelRequest.repository');
-const { validateExpenseAgainstPolicy } = require('./policyValidation.hook');
+const policyService = require('./policy.service');
+const { evaluateExpenseAgainstPolicy } = require('./violationEvaluator');
 const {
   BadRequestError,
   NotFoundError,
@@ -79,26 +80,35 @@ class ExpenseService {
 
     let status = 'submitted';
     let flaggedReason = '';
-    const auditNotes = [];
+    let violations = [];
 
     if (duplicate) {
       status = 'flagged';
       flaggedReason = `Potential duplicate: matches expense ${duplicate._id} (same user, amount, date)`;
-      auditNotes.push(flaggedReason);
     }
 
-    // 4. Policy validation
-    const policyResult = validateExpenseAgainstPolicy(data);
-    if (policyResult.flagged) {
-      status = 'flagged';
-      const policyReasons = policyResult.reasons.join('; ');
-      flaggedReason = flaggedReason
-        ? `${flaggedReason}. ${policyReasons}`
-        : policyReasons;
-      auditNotes.push(...policyResult.reasons);
+    // 4. Policy validation via real violation engine
+    const activePolicy = await policyService.getActiveOrNull();
+
+    if (activePolicy) {
+      const policyViolations = evaluateExpenseAgainstPolicy(
+        data,
+        activePolicy.rules
+      );
+
+      if (policyViolations.length > 0) {
+        status = 'flagged';
+        violations = policyViolations;
+        const policyReasons = policyViolations
+          .map((v) => v.message)
+          .join('; ');
+        flaggedReason = flaggedReason
+          ? `${flaggedReason}. ${policyReasons}`
+          : policyReasons;
+      }
     }
 
-    // 5. Build audit log
+    // 5. Build audit note
     const initialAuditNote =
       status === 'flagged'
         ? `Expense submitted and auto-flagged: ${flaggedReason}`
@@ -115,6 +125,7 @@ class ExpenseService {
       receiptUrl: receiptPath || '',
       status,
       flaggedReason,
+      violations,
       auditLogs: [
         {
           action: status === 'flagged' ? 'submitted_flagged' : 'submitted',

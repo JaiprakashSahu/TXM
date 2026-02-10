@@ -87,6 +87,25 @@ const travelRequestSchema = new mongoose.Schema(
       maxlength: 1000,
       default: '',
     },
+    policySnapshot: {
+      type: mongoose.Schema.Types.Mixed,
+      default: null,
+    },
+    violations: {
+      type: [
+        {
+          code: String,
+          message: String,
+          amount: mongoose.Schema.Types.Mixed,
+          limit: mongoose.Schema.Types.Mixed,
+        },
+      ],
+      default: [],
+    },
+    hasViolations: {
+      type: Boolean,
+      default: false,
+    },
     auditLogs: [auditLogSchema],
   },
   {

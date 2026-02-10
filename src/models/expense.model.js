@@ -79,6 +79,17 @@ const expenseSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    violations: {
+      type: [
+        {
+          code: String,
+          message: String,
+          amount: mongoose.Schema.Types.Mixed,
+          limit: mongoose.Schema.Types.Mixed,
+        },
+      ],
+      default: [],
+    },
     auditLogs: [auditLogSchema],
   },
   {

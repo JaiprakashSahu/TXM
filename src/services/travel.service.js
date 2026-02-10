@@ -1,5 +1,7 @@
 const travelRequestRepository = require('../repositories/travelRequest.repository');
 const userRepository = require('../repositories/user.repository');
+const policyService = require('./policy.service');
+const { evaluateTravelAgainstPolicy } = require('./violationEvaluator');
 const {
   BadRequestError,
   NotFoundError,
@@ -110,11 +112,47 @@ class TravelRequestService {
 
   /**
    * Submit a draft for manager approval.
+   * Evaluates the request against the active policy and stores a snapshot.
    */
   async submit({ id, actor, note = '' }) {
     const tr = await this._findAndAssertOwner(id, actor);
 
     assertTransition(tr.status, 'submitted');
+
+    // ── Policy evaluation on submit ──────────────────────────────────────
+    const activePolicy = await policyService.getActiveOrNull();
+
+    if (activePolicy) {
+      const snapshot = {
+        policyId: activePolicy._id,
+        name: activePolicy.name,
+        version: activePolicy.version,
+        rules: activePolicy.rules,
+      };
+
+      const violations = evaluateTravelAgainstPolicy(tr, activePolicy.rules);
+
+      tr.policySnapshot = snapshot;
+      tr.violations = violations;
+      tr.hasViolations = violations.length > 0;
+
+      if (violations.length > 0) {
+        const violationSummary = violations
+          .map((v) => v.message)
+          .join('; ');
+        appendAudit(tr, {
+          action: 'policy_evaluated',
+          actor,
+          note: `Policy violations detected: ${violationSummary}`,
+        });
+      } else {
+        appendAudit(tr, {
+          action: 'policy_evaluated',
+          actor,
+          note: `Compliant with policy "${activePolicy.name}" v${activePolicy.version}`,
+        });
+      }
+    }
 
     tr.status = 'submitted';
     appendAudit(tr, {
