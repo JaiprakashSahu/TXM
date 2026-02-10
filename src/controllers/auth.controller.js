@@ -1,4 +1,5 @@
 const authService = require('../services/auth.service');
+const userRepository = require('../repositories/user.repository');
 const { registerSchema, loginSchema, refreshSchema } = require('../validators/auth.validator');
 const { BadRequestError } = require('../utils/errors');
 
@@ -55,6 +56,21 @@ class AuthController {
     res.status(200).json({
       success: true,
       message: 'Logged out successfully',
+    });
+  }
+
+  async profile(req, res) {
+    res.status(200).json({
+      success: true,
+      data: req.user,
+    });
+  }
+
+  async listManagers(req, res) {
+    const managers = await userRepository.findManagers();
+    res.status(200).json({
+      success: true,
+      data: managers,
     });
   }
 }

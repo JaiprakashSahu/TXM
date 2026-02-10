@@ -26,6 +26,13 @@ router.get(
   asyncWrapper((req, res) => expenseController.listPending(req, res))
 );
 
+// List flagged expenses only
+router.get(
+  '/flagged',
+  authorize('admin'),
+  asyncWrapper((req, res) => expenseController.listFlagged(req, res))
+);
+
 // ── Employee routes ──────────────────────────────────────────────────────────
 
 // Submit an expense with optional receipt upload

@@ -104,6 +104,22 @@ class ExpenseController {
     });
   }
 
+  async listFlagged(req, res) {
+    const pagination = validate(expensePaginationSchema, req.query);
+    const result = await expenseService.listFlagged({ pagination });
+
+    res.status(200).json({
+      success: true,
+      data: result.docs,
+      meta: {
+        total: result.total,
+        page: result.page,
+        limit: result.limit,
+        totalPages: result.totalPages,
+      },
+    });
+  }
+
   async getById(req, res) {
     const result = await expenseService.getById({
       id: req.params.id,

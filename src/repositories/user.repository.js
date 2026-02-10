@@ -20,6 +20,12 @@ class UserRepository {
   async findActiveById(id) {
     return User.findOne({ _id: id, isActive: true }).exec();
   }
+
+  async findManagers() {
+    return User.find({ role: { $in: ['manager', 'admin'] }, isActive: true })
+      .select('_id name email role')
+      .exec();
+  }
 }
 
 module.exports = new UserRepository();
