@@ -126,12 +126,47 @@ export interface AuditLog {
   note: string;
 }
 
-// Analytics summary
-export interface AnalyticsSummary {
-  totalTravelRequests: number;
-  totalExpenses: number;
-  totalBookings: number;
-  totalSpend: number;
-  pendingApprovals: number;
-  flaggedExpenses: number;
+// Analytics types — matching backend aggregation shapes
+
+export interface SpendSummary {
+  totalExpenseAmount: number;
+  approvedExpenseAmount: number;
+  flaggedExpenseAmount: number;
+  rejectedExpenseAmount: number;
+  submittedExpenseAmount: number;
+  totalCount: number;
+  countByStatus: Record<string, number>;
+}
+
+export interface MonthlyTrend {
+  year: number;
+  month: number;
+  totalAmount: number;
+  expenseCount: number;
+}
+
+export interface TopSpender {
+  userId: string;
+  name: string;
+  email: string;
+  totalAmount: number;
+  expenseCount: number;
+}
+
+export interface ViolationStat {
+  code: string;
+  totalCount: number;
+  expenseCount: number;
+  travelRequestCount: number;
+  sampleMessage: string;
+}
+
+export interface ManagerPerformance {
+  managerId: string;
+  name: string;
+  email: string;
+  approvedCount: number;
+  rejectedCount: number;
+  totalDecisions: number;
+  avgApprovalTimeHours: number | null;
 }
