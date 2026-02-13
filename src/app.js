@@ -16,7 +16,13 @@ registerHandlers();
 app.use(helmet());
 
 // CORS
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://txm-one.vercel.app"
+  ],
+  credentials: true
+}))
 
 // Body parsing
 app.use(express.json({ limit: '10kb' }));
