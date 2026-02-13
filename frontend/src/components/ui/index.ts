@@ -11,3 +11,4 @@ export { UserChip } from './UserChip';
 export { ApprovalPanel } from './ApprovalPanel';
 export { ReceiptPreviewModal } from './ReceiptPreviewModal';
 export { AuditTimeline } from './AuditTimeline';
+export { ConfirmModal } from './ConfirmModal';

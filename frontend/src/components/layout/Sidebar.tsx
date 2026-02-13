@@ -121,7 +121,7 @@ export function Sidebar() {
         <div className="p-2 bg-primary-600 rounded-lg">
           <Briefcase className="h-5 w-5 text-white" />
         </div>
-        <span className="text-lg font-bold text-surface-100">ITILITE</span>
+        <span className="text-lg font-bold text-surface-100">ITILITE Lite</span>
       </div>
 
       {/* Navigation */}
