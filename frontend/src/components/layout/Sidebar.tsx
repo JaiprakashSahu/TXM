@@ -10,14 +10,14 @@ import {
   LayoutDashboard,
   Plane,
   Receipt,
-  Clock,
   CalendarCheck,
   Bell,
   CheckSquare,
-  AlertTriangle,
   FileText,
   BarChart3,
   Flag,
+  ClipboardCheck,
+  DollarSign,
 } from 'lucide-react';
 
 interface NavItem {
@@ -25,17 +25,18 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   roles: UserRole[];
+  section?: string;
 }
 
 const navItems: NavItem[] = [
-  // All users
+  // ── All Users ──
   {
     href: '/dashboard',
     label: 'Overview',
     icon: LayoutDashboard,
     roles: ['employee', 'manager', 'admin'],
+    section: 'General',
   },
-  // Employee
   {
     href: '/dashboard/travel',
     label: 'Travel Requests',
@@ -60,30 +61,47 @@ const navItems: NavItem[] = [
     icon: Bell,
     roles: ['employee', 'manager', 'admin'],
   },
-  // Manager
+
+  // ── Manager ──
+  {
+    href: '/dashboard/manager/travel/pending',
+    label: 'Travel Approvals',
+    icon: ClipboardCheck,
+    roles: ['manager', 'admin'],
+    section: 'Manager',
+  },
   {
     href: '/dashboard/approvals',
-    label: 'Pending Approvals',
+    label: 'Quick Approvals',
     icon: CheckSquare,
     roles: ['manager', 'admin'],
   },
-  // Admin
+
+  // ── Finance / Admin ──
   {
-    href: '/dashboard/policies',
-    label: 'Policies',
-    icon: FileText,
+    href: '/dashboard/finance/expenses/pending',
+    label: 'Expense Review',
+    icon: DollarSign,
     roles: ['admin'],
-  },
-  {
-    href: '/dashboard/analytics',
-    label: 'Analytics',
-    icon: BarChart3,
-    roles: ['admin'],
+    section: 'Finance',
   },
   {
     href: '/dashboard/flagged',
     label: 'Flagged Expenses',
     icon: Flag,
+    roles: ['admin'],
+  },
+  {
+    href: '/dashboard/policies',
+    label: 'Policies',
+    icon: FileText,
+    roles: ['admin'],
+    section: 'Admin',
+  },
+  {
+    href: '/dashboard/analytics',
+    label: 'Analytics',
+    icon: BarChart3,
     roles: ['admin'],
   },
 ];
@@ -93,6 +111,8 @@ export function Sidebar() {
   const { role } = useAuth();
 
   const filteredItems = navItems.filter((item) => role && item.roles.includes(role));
+
+  let lastSection: string | undefined;
 
   return (
     <aside className="w-64 bg-surface-900 border-r border-surface-700 flex flex-col h-full">
@@ -112,8 +132,16 @@ export function Sidebar() {
               pathname === item.href ||
               (item.href !== '/dashboard' && pathname.startsWith(item.href));
 
+            const showSection = item.section && item.section !== lastSection;
+            if (item.section) lastSection = item.section;
+
             return (
               <li key={item.href}>
+                {showSection && (
+                  <p className="px-3 pt-5 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-surface-500">
+                    {item.section}
+                  </p>
+                )}
                 <Link
                   href={item.href}
                   className={cn(
