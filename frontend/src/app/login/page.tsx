@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div className="p-3 bg-primary-600 rounded-xl">
             <Briefcase className="h-8 w-8 text-white" />
           </div>
-          <span className="text-2xl font-bold text-surface-100">ITILITE</span>
+          <span className="text-2xl font-bold text-surface-100">ITILITE Lite</span>
         </div>
 
         <Card className="p-8">
