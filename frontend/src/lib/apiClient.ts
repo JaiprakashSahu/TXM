@@ -1,7 +1,8 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getTokens, setTokens, clearTokens } from './tokenStorage';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+console.log("API BASE:", API_URL); // Safety Check
 
 // Create axios instance
 const apiClient = axios.create({
