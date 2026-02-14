@@ -13,8 +13,12 @@ class UserRepository {
     return query.exec();
   }
 
-  async findById(id) {
-    return User.findById(id).exec();
+  async findById(id, includePassword = false) {
+    const query = User.findById(id);
+    if (includePassword) {
+      query.select('+password');
+    }
+    return query.exec();
   }
 
   async findActiveById(id) {

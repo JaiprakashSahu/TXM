@@ -1,6 +1,6 @@
 const authService = require('../services/auth.service');
 const userRepository = require('../repositories/user.repository');
-const { registerSchema, loginSchema, refreshSchema } = require('../validators/auth.validator');
+const { registerSchema, loginSchema, refreshSchema, changePasswordSchema } = require('../validators/auth.validator');
 const { BadRequestError } = require('../utils/errors');
 
 class AuthController {
@@ -56,6 +56,21 @@ class AuthController {
     res.status(200).json({
       success: true,
       message: 'Logged out successfully',
+    });
+  }
+
+  async changePassword(req, res) {
+    const { error, value } = changePasswordSchema.validate(req.body, { abortEarly: false });
+    if (error) {
+      throw new BadRequestError(error.details.map((d) => d.message).join(', '));
+    }
+
+    const { oldPassword, newPassword } = value;
+    await authService.changePassword(req.user._id, oldPassword, newPassword);
+
+    res.status(200).json({
+      success: true,
+      message: 'Password changed successfully',
     });
   }
 

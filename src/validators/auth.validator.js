@@ -40,4 +40,14 @@ const refreshSchema = Joi.object({
   }),
 });
 
-module.exports = { registerSchema, loginSchema, refreshSchema };
+const changePasswordSchema = Joi.object({
+  oldPassword: Joi.string().required().messages({
+    'any.required': 'Old password is required',
+  }),
+  newPassword: Joi.string().required().min(8).messages({
+    'string.min': 'New password must be at least 8 characters',
+    'any.required': 'New password is required',
+  }),
+});
+
+module.exports = { registerSchema, loginSchema, refreshSchema, changePasswordSchema };
