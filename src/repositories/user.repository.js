@@ -30,6 +30,10 @@ class UserRepository {
       .select('_id name email role')
       .exec();
   }
+
+  async findAll() {
+    return User.find({}).sort({ createdAt: -1 }).exec();
+  }
 }
 
 module.exports = new UserRepository();

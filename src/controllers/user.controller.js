@@ -58,6 +58,14 @@ class UserController {
             },
         });
     }
+
+    async getUsers(req, res) {
+        const users = await User.find({}).sort({ createdAt: -1 });
+        res.json({
+            success: true,
+            data: users,
+        });
+    }
 }
 
 module.exports = new UserController();
