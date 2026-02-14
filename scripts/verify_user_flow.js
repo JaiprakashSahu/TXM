@@ -13,8 +13,8 @@ async function runTest() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email: 'admin@test.com',
-                password: 'password123',
+                email: process.env.ADMIN_EMAIL || 'admin@test.com',
+                password: process.env.ADMIN_PASSWORD || 'password123',
             }),
         });
         const adminLogin = await adminLoginRes.json();
