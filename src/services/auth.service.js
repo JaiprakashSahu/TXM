@@ -141,6 +141,7 @@ class AuthService {
 
     userWithPassword.password = newPassword;
     userWithPassword.mustChangePassword = false;
+    userWithPassword.passwordChangedAt = new Date();
     await userWithPassword.save();
   }
 }
