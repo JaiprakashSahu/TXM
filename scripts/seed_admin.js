@@ -10,12 +10,13 @@ async function seedAdmin() {
         await mongoose.connect(MONGO_URI);
         console.log('Connected to MongoDB');
 
-        const adminEmail = 'admin@test.com';
+        const adminEmail = process.env.ADMIN_EMAIL || 'admin@test.com';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'password123';
         const existingAdmin = await User.findOne({ email: adminEmail });
 
         if (existingAdmin) {
             console.log('Admin already exists. Updating password...');
-            existingAdmin.password = 'password123';
+            existingAdmin.password = adminPassword;
             await existingAdmin.save();
             console.log('✅ Admin password updated.');
         } else {
@@ -23,7 +24,7 @@ async function seedAdmin() {
             const admin = new User({
                 name: 'Admin User',
                 email: adminEmail,
-                password: 'password123',
+                password: adminPassword,
                 role: 'admin',
                 isActive: true,
                 mustChangePassword: false, // Admin doesn't need to change password initially

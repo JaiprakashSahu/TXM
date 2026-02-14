@@ -159,11 +159,7 @@ itilite-lite/
 
 ## 🔐 Credentials (Demo)
 
-| Role | Email | Password |
-|------|-------|----------|
-| **Admin** | admin@test.com | password123 |
-| **Manager** | manager@test.com | password123 |
-| **Employee** | employee@test.com | password123 |
+<!-- Credentials removed for security. Check internal documentation. -->
 
 ---
 
