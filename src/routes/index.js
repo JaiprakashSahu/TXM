@@ -6,7 +6,10 @@ const expenseRoutes = require('./expense.routes');
 const policyRoutes = require('./policy.routes');
 const bookingRoutes = require('./booking.routes');
 const analyticsRoutes = require('./analytics.routes');
+const bookingRoutes = require('./booking.routes');
+const analyticsRoutes = require('./analytics.routes');
 const notificationRoutes = require('./notification.routes');
+const userRoutes = require('./user.routes');
 
 const router = Router();
 
@@ -18,5 +21,6 @@ router.use('/policy', policyRoutes);
 router.use('/booking', bookingRoutes);
 router.use('/analytics', analyticsRoutes);
 router.use('/notifications', notificationRoutes);
+router.use('/users', userRoutes);
 
 module.exports = router;

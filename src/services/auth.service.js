@@ -76,7 +76,14 @@ class AuthService {
     // Remove password from response
     user.password = undefined;
 
-    return { user, accessToken, refreshToken };
+    return {
+      user: {
+        ...user.toJSON(),
+        mustChangePassword: user.mustChangePassword
+      },
+      accessToken,
+      refreshToken
+    };
   }
 
   async refresh(refreshToken) {
@@ -116,6 +123,25 @@ class AuthService {
       throw new UnauthorizedError('Refresh token is required');
     }
     await refreshTokenRepository.deleteByToken(refreshToken);
+  }
+
+  async changePassword(userId, oldPassword, newPassword) {
+    const user = await userRepository.findActiveById(userId);
+    if (!user) {
+      throw new NotFoundError('User not found');
+    }
+
+    // We need to fetch password explicitly because select: false in schema
+    const userWithPassword = await userRepository.findById(userId, true);
+
+    const isMatch = await userWithPassword.comparePassword(oldPassword);
+    if (!isMatch) {
+      throw new UnauthorizedError('Invalid password');
+    }
+
+    userWithPassword.password = newPassword;
+    userWithPassword.mustChangePassword = false;
+    await userWithPassword.save();
   }
 }
 
