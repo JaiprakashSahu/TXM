@@ -161,9 +161,9 @@ itilite-lite/
 
 | Role | Email | Password |
 |------|-------|----------|
-| **Admin** | admin@test.com | password123 |
-| **Manager** | manager@test.com | password123 |
-| **Employee** | employee@test.com | password123 |
+| **Admin** | admin@test.com | Test123 |
+| **Manager** | manager@test.com | Test123 |
+| **Employee** | employee@test.com | Test123 |
 
 ---
 
