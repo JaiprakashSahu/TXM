@@ -10,7 +10,7 @@ const router = Router();
 router.post(
     '/',
     authenticate,
-    authorize(['admin']),
+    authorize('admin'),
     asyncWrapper((req, res) => userController.createUser(req, res))
 );
 
