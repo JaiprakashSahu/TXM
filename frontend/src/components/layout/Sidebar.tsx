@@ -18,6 +18,7 @@ import {
   Flag,
   ClipboardCheck,
   DollarSign,
+  Users,
 } from 'lucide-react';
 
 interface NavItem {
@@ -102,6 +103,12 @@ const navItems: NavItem[] = [
     href: '/dashboard/analytics',
     label: 'Analytics',
     icon: BarChart3,
+    roles: ['admin'],
+  },
+  {
+    href: '/dashboard/users',
+    label: 'Users',
+    icon: Users,
     roles: ['admin'],
   },
 ];
