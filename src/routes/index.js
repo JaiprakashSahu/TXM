@@ -6,8 +6,6 @@ const expenseRoutes = require('./expense.routes');
 const policyRoutes = require('./policy.routes');
 const bookingRoutes = require('./booking.routes');
 const analyticsRoutes = require('./analytics.routes');
-const bookingRoutes = require('./booking.routes');
-const analyticsRoutes = require('./analytics.routes');
 const notificationRoutes = require('./notification.routes');
 const userRoutes = require('./user.routes');
 
