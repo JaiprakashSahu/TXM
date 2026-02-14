@@ -1,6 +1,24 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/change-password/page": "app/change-password/page.js",
   "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
   "/dashboard/analytics/page": "app/dashboard/analytics/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/dashboard/expenses/page": "app/dashboard/expenses/page.js",
+  "/dashboard/bookings/page": "app/dashboard/bookings/page.js",
+  "/dashboard/approvals/page": "app/dashboard/approvals/page.js",
+  "/dashboard/finance/expenses/pending/page": "app/dashboard/finance/expenses/pending/page.js",
+  "/dashboard/finance/expenses/[id]/page": "app/dashboard/finance/expenses/[id]/page.js",
+  "/dashboard/manager/travel/pending/page": "app/dashboard/manager/travel/pending/page.js",
+  "/dashboard/flagged/page": "app/dashboard/flagged/page.js",
+  "/dashboard/manager/travel/[id]/page": "app/dashboard/manager/travel/[id]/page.js",
+  "/dashboard/notifications/page": "app/dashboard/notifications/page.js",
+  "/dashboard/policies/[id]/page": "app/dashboard/policies/[id]/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/policies/new/page": "app/dashboard/policies/new/page.js",
+  "/dashboard/policies/page": "app/dashboard/policies/page.js",
+  "/dashboard/travel/page": "app/dashboard/travel/page.js",
+  "/dashboard/users/page": "app/dashboard/users/page.js",
+  "/dashboard/travel/[id]/page": "app/dashboard/travel/[id]/page.js",
+  "/dashboard/travel/new/page": "app/dashboard/travel/new/page.js"
 }

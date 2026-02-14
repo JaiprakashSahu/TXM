@@ -14,4 +14,11 @@ router.post(
     asyncWrapper((req, res) => userController.createUser(req, res))
 );
 
+router.get(
+    '/',
+    authenticate,
+    authorize('admin'),
+    asyncWrapper((req, res) => userController.getUsers(req, res))
+);
+
 module.exports = router;
