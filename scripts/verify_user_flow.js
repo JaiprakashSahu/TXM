@@ -68,6 +68,19 @@ async function runTest() {
         console.log('✅ User logged in. mustChangePassword is YES.\n');
 
         // 4. Change Password
+        // 3.5 Verify Blocked Access
+        console.log('3.5 Verifying Blocked Access (Should fail with 403)...');
+        const profileResRaw = await fetch(`${API_URL}/auth/profile`, {
+            headers: { Authorization: `Bearer ${userToken}` }
+        });
+        if (profileResRaw.status === 403) {
+            console.log('✅ Access blocked correctly (403 Forbidden).\n');
+        } else {
+            console.error(`❌ Access NOT blocked! Status: ${profileResRaw.status}`);
+            throw new Error('Security check failed: User could access profile without changing password.');
+        }
+
+        // 4. Change Password
         console.log('4. Changing Password...');
         const newPassword = 'NewSecurePassword123!';
         const changePwdResRaw = await fetch(`${API_URL}/auth/change-password`, {

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const env = require('../config/env');
 const userRepository = require('../repositories/user.repository');
-const { UnauthorizedError } = require('../utils/errors');
+const { UnauthorizedError, ForbiddenError } = require('../utils/errors');
 
 const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -20,6 +20,13 @@ const authenticate = async (req, res, next) => {
       return next(new UnauthorizedError('User not found or inactive'));
     }
     req.user = user;
+
+    // Optional: Block access if password change is required
+    // Allow /change-password route to proceed
+    if (user.mustChangePassword && !req.originalUrl.endsWith('/change-password')) {
+      return next(new ForbiddenError('Password change required'));
+    }
+
     next();
   } catch (err) {
     if (err.name === 'TokenExpiredError') {

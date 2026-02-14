@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const env = require('../config/env');
 
-const ROLES = ['employee', 'manager', 'admin'];
+const ROLES = ['employee', 'manager', 'admin', 'finance'];
 
 const userSchema = new mongoose.Schema(
   {
@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema(
     mustChangePassword: {
       type: Boolean,
       default: false,
+    },
+    passwordChangedAt: {
+      type: Date,
     },
   },
   {
