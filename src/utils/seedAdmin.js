@@ -8,10 +8,17 @@ const logger = require('./logger');
  */
 async function seedAdmin() {
     try {
-        const adminExists = await User.findOne({ role: 'admin' });
+        const adminExists = await User.findOne({ role: 'admin' }).select('+password');
 
         if (adminExists) {
-            logger.info('[SeedAdmin] Admin user already exists. Skipping...');
+            if (adminExists.email === env.admin.email) {
+                logger.info(`[SeedAdmin] Admin ${adminExists.email} exists. Synchronizing password...`);
+                adminExists.password = env.admin.password;
+                await adminExists.save();
+                logger.info('[SeedAdmin] Admin password synchronized.');
+            } else {
+                logger.info(`[SeedAdmin] Admin already exists with different email: ${adminExists.email}. Skipping...`);
+            }
             return;
         }
 
