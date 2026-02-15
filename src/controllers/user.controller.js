@@ -66,6 +66,102 @@ class UserController {
             data: users,
         });
     }
+
+    async getUser(req, res) {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            throw new NotFoundError('User not found');
+        }
+        res.json({
+            success: true,
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                isActive: user.isActive,
+                mustChangePassword: user.mustChangePassword,
+                createdAt: user.createdAt,
+            },
+        });
+    }
+
+    async updateRole(req, res) {
+        const { role } = req.body;
+        const allowedRoles = ['employee', 'manager', 'finance'];
+
+        if (!allowedRoles.includes(role)) {
+            throw new BadRequestError(`Invalid role. Allowed roles: ${allowedRoles.join(', ')}`);
+        }
+
+        const targetUser = await User.findById(req.params.id);
+        if (!targetUser) {
+            throw new NotFoundError('User not found');
+        }
+
+        // Safety rules
+        if (targetUser._id.toString() === req.user._id.toString()) {
+            throw new ForbiddenError('Admin cannot change own role');
+        }
+
+        if (targetUser.role === 'admin') {
+            throw new ForbiddenError('Admin cannot change another admin\'s role');
+        }
+
+        targetUser.role = role;
+        await targetUser.save();
+
+        res.json({
+            success: true,
+            message: `User role updated to ${role}`,
+        });
+    }
+
+    async deactivateUser(req, res) {
+        const targetUser = await User.findById(req.params.id);
+        if (!targetUser) {
+            throw new NotFoundError('User not found');
+        }
+
+        // Safety rules
+        if (targetUser._id.toString() === req.user._id.toString()) {
+            throw new ForbiddenError('Admin cannot deactivate themselves');
+        }
+
+        if (targetUser.role === 'admin') {
+            // Check if this is the last admin
+            const adminCount = await User.countDocuments({ role: 'admin', isActive: true });
+            if (adminCount <= 1) {
+                throw new ForbiddenError('Cannot deactivate the last remaining admin');
+            }
+        }
+
+        targetUser.isActive = false;
+        await targetUser.save();
+
+        res.json({
+            success: true,
+            message: 'User account deactivated successfully',
+        });
+    }
+
+    async resetPassword(req, res) {
+        const targetUser = await User.findById(req.params.id);
+        if (!targetUser) {
+            throw new NotFoundError('User not found');
+        }
+
+        const tempPassword = crypto.randomBytes(8).toString('hex');
+        targetUser.password = tempPassword;
+        targetUser.mustChangePassword = true;
+        await targetUser.save();
+
+        res.json({
+            success: true,
+            message: 'Password reset successful',
+            temporaryPassword: tempPassword,
+        });
+    }
 }
 
 module.exports = new UserController();

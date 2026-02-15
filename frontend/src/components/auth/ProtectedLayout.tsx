@@ -19,10 +19,10 @@ export function ProtectedLayout({ children }: ProtectedLayoutProps) {
     } else if (
       !isLoading &&
       isAuthenticated &&
-      (user as any)?.mustChangePassword && // user type might miss this field, cast or update type later.
-      !window.location.pathname.startsWith('/change-password')
+      (user as any)?.mustChangePassword &&
+      window.location.pathname !== '/dashboard/profile'
     ) {
-      router.replace('/change-password');
+      router.replace('/dashboard/profile?forceChange=true');
     }
   }, [isAuthenticated, isLoading, router]);
 

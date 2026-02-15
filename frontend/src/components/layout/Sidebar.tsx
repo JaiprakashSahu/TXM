@@ -115,7 +115,7 @@ const navItems: NavItem[] = [
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { role } = useAuth();
+  const { role, user } = useAuth();
 
   const filteredItems = navItems.filter((item) => role && item.roles.includes(role));
 
@@ -142,6 +142,8 @@ export function Sidebar() {
             const showSection = item.section && item.section !== lastSection;
             if (item.section) lastSection = item.section;
 
+            const isDisabled = (user as any)?.mustChangePassword && item.href !== '/dashboard/profile';
+
             return (
               <li key={item.href}>
                 {showSection && (
@@ -149,18 +151,29 @@ export function Sidebar() {
                     {item.section}
                   </p>
                 )}
-                <Link
-                  href={item.href}
-                  className={cn(
-                    'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors duration-150',
-                    isActive
-                      ? 'bg-primary-600/20 text-primary-400'
-                      : 'text-surface-400 hover:bg-surface-800 hover:text-surface-100'
-                  )}
-                >
-                  <item.icon className="h-5 w-5 flex-shrink-0" />
-                  <span>{item.label}</span>
-                </Link>
+                {isDisabled ? (
+                  <div
+                    className={cn(
+                      'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium opacity-50 cursor-not-allowed text-surface-600'
+                    )}
+                  >
+                    <item.icon className="h-5 w-5 flex-shrink-0" />
+                    <span>{item.label}</span>
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors duration-150',
+                      isActive
+                        ? 'bg-primary-600/20 text-primary-400'
+                        : 'text-surface-400 hover:bg-surface-800 hover:text-surface-100'
+                    )}
+                  >
+                    <item.icon className="h-5 w-5 flex-shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                )}
               </li>
             );
           })}

@@ -22,8 +22,9 @@ const authenticate = async (req, res, next) => {
     req.user = user;
 
     // Optional: Block access if password change is required
-    // Allow /change-password route to proceed
-    if (user.mustChangePassword && !req.originalUrl.endsWith('/change-password')) {
+    // Allow profile and change-password routes to proceed during forced change
+    const isAllowedPath = req.originalUrl.endsWith('/change-password') || req.originalUrl.endsWith('/profile');
+    if (user.mustChangePassword && !isAllowedPath) {
       return next(new ForbiddenError('Password change required'));
     }
 

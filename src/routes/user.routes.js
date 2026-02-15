@@ -21,4 +21,32 @@ router.get(
     asyncWrapper((req, res) => userController.getUsers(req, res))
 );
 
+router.get(
+    '/:id',
+    authenticate,
+    authorize('admin'),
+    asyncWrapper((req, res) => userController.getUser(req, res))
+);
+
+router.patch(
+    '/:id/role',
+    authenticate,
+    authorize('admin'),
+    asyncWrapper((req, res) => userController.updateRole(req, res))
+);
+
+router.patch(
+    '/:id/deactivate',
+    authenticate,
+    authorize('admin'),
+    asyncWrapper((req, res) => userController.deactivateUser(req, res))
+);
+
+router.post(
+    '/:id/reset-password',
+    authenticate,
+    authorize('admin'),
+    asyncWrapper((req, res) => userController.resetPassword(req, res))
+);
+
 module.exports = router;
