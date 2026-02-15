@@ -75,9 +75,19 @@ class AuthController {
   }
 
   async profile(req, res) {
+    const user = req.user;
     res.status(200).json({
       success: true,
-      data: req.user,
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isActive: user.isActive,
+        mustChangePassword: user.mustChangePassword,
+        createdAt: user.createdAt,
+        passwordChangedAt: user.passwordChangedAt,
+      },
     });
   }
 

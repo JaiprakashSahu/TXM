@@ -7,6 +7,7 @@ const {
   ConflictError,
   UnauthorizedError,
   NotFoundError,
+  ForbiddenError,
 } = require('../utils/errors');
 
 class AuthService {
@@ -55,8 +56,12 @@ class AuthService {
 
   async login({ email, password }) {
     const user = await userRepository.findByEmail(email, true);
-    if (!user || !user.isActive) {
+    if (!user) {
       throw new UnauthorizedError('Invalid email or password');
+    }
+
+    if (!user.isActive) {
+      throw new ForbiddenError('Account deactivated');
     }
 
     const isMatch = await user.comparePassword(password);

@@ -1,5 +1,5 @@
 // User roles
-export type UserRole = 'employee' | 'manager' | 'admin';
+export type UserRole = 'employee' | 'manager' | 'admin' | 'finance';
 
 // User type from JWT/API
 export interface User {
@@ -8,6 +8,8 @@ export interface User {
   email: string;
   role: UserRole;
   isActive: boolean;
+  mustChangePassword?: boolean;
+  passwordChangedAt?: string;
   createdAt: string;
   updatedAt: string;
 }
