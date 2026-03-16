@@ -81,7 +81,7 @@ export default function ProfilePage() {
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-surface-50">User Profile</h2>
+                <h2 className="text-2xl font-bold text-gray-900">User Profile</h2>
                 {user.role === 'admin' && (
                     <Badge variant="primary" className="border-primary-500/50 text-primary-400">System Administrator</Badge>
                 )}
@@ -104,12 +104,12 @@ export default function ProfilePage() {
                 <div className="md:col-span-1 space-y-6">
                     <Card className="p-6">
                         <div className="flex flex-col items-center text-center space-y-4">
-                            <div className="w-20 h-20 bg-surface-800 rounded-full flex items-center justify-center border-2 border-surface-700">
-                                <UserIcon className="h-10 w-10 text-surface-400" />
+                            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center border-2 border-gray-200">
+                                <UserIcon className="h-10 w-10 text-gray-500" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-bold text-surface-50">{user.name}</h3>
-                                <p className="text-sm text-surface-400">{user.email}</p>
+                                <h3 className="text-lg font-bold text-gray-900">{user.name}</h3>
+                                <p className="text-sm text-gray-500">{user.email}</p>
                             </div>
                             <div className="flex flex-wrap justify-center gap-2">
                                 <Badge variant="neutral" className="capitalize">{user.role}</Badge>
@@ -121,17 +121,17 @@ export default function ProfilePage() {
 
                         <div className="mt-8 space-y-4">
                             <div className="flex items-center gap-3 text-sm">
-                                <Calendar className="h-4 w-4 text-surface-500" />
+                                <Calendar className="h-4 w-4 text-gray-400" />
                                 <div>
-                                    <p className="text-surface-500 text-[10px] uppercase font-bold tracking-wider">Joined</p>
-                                    <p className="text-surface-200">{formatDate(user.createdAt)}</p>
+                                    <p className="text-gray-400 text-[10px] uppercase font-bold tracking-wider">Joined</p>
+                                    <p className="text-gray-800">{formatDate(user.createdAt)}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 text-sm">
-                                <ShieldCheck className="h-4 w-4 text-surface-500" />
+                                <ShieldCheck className="h-4 w-4 text-gray-400" />
                                 <div>
-                                    <p className="text-surface-500 text-[10px] uppercase font-bold tracking-wider">Password Last Updated</p>
-                                    <p className="text-surface-200">{formatDate(user.passwordChangedAt)}</p>
+                                    <p className="text-gray-400 text-[10px] uppercase font-bold tracking-wider">Password Last Updated</p>
+                                    <p className="text-gray-800">{formatDate(user.passwordChangedAt)}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,12 +143,12 @@ export default function ProfilePage() {
                     <Card className="p-6">
                         <div className="flex items-center gap-2 mb-6">
                             <Key className="h-5 w-5 text-primary-400" />
-                            <h3 className="text-lg font-bold text-surface-50">Security & Credentials</h3>
+                            <h3 className="text-lg font-bold text-gray-900">Security & Credentials</h3>
                         </div>
 
                         <form onSubmit={handlePasswordChange} className="space-y-4">
                             <div className="space-y-2">
-                                <label className="text-sm font-medium text-surface-300">Current Password</label>
+                                <label className="text-sm font-medium text-gray-700">Current Password</label>
                                 <Input
                                     type="password"
                                     name="oldPassword"
@@ -161,7 +161,7 @@ export default function ProfilePage() {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-surface-300">New Password</label>
+                                    <label className="text-sm font-medium text-gray-700">New Password</label>
                                     <Input
                                         type="password"
                                         name="newPassword"
@@ -172,7 +172,7 @@ export default function ProfilePage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-surface-300">Confirm New Password</label>
+                                    <label className="text-sm font-medium text-gray-700">Confirm New Password</label>
                                     <Input
                                         type="password"
                                         name="confirmPassword"

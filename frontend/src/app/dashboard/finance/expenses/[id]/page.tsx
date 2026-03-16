@@ -91,7 +91,7 @@ function ReviewContent() {
     if (!expense) {
         return (
             <div className="text-center py-12">
-                <p className="text-surface-400">Expense not found.</p>
+                <p className="text-gray-500">Expense not found.</p>
             </div>
         );
     }
@@ -101,13 +101,13 @@ function ReviewContent() {
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link href="/dashboard/finance/expenses/pending">
-                    <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-800 hover:text-surface-100 transition-colors">
+                    <button className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-gray-900 transition-colors">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </Link>
                 <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-surface-100">Review Expense</h1>
-                    <p className="text-surface-400 mt-1">
+                    <h1 className="text-2xl font-bold text-gray-900">Review Expense</h1>
+                    <p className="text-gray-500 mt-1">
                         {expense.category.charAt(0).toUpperCase() + expense.category.slice(1)} expense
                     </p>
                 </div>
@@ -138,8 +138,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <DollarSign className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Amount</p>
-                                    <p className="text-2xl font-bold text-surface-100 mt-0.5">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Amount</p>
+                                    <p className="text-2xl font-bold text-gray-900 mt-0.5">
                                         {formatCurrency(expense.amount)}
                                     </p>
                                 </div>
@@ -148,8 +148,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <Tag className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Category</p>
-                                    <p className="text-sm text-surface-200 mt-0.5 capitalize">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Category</p>
+                                    <p className="text-sm text-gray-800 mt-0.5 capitalize">
                                         {expense.category}
                                     </p>
                                 </div>
@@ -158,8 +158,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <Calendar className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Expense Date</p>
-                                    <p className="text-sm text-surface-200 mt-0.5">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Expense Date</p>
+                                    <p className="text-sm text-gray-800 mt-0.5">
                                         {formatDate(expense.expenseDate)}
                                     </p>
                                 </div>
@@ -169,8 +169,8 @@ function ReviewContent() {
                                 <div className="flex items-start gap-3">
                                     <FileText className="h-5 w-5 text-primary-400 mt-0.5" />
                                     <div className="flex-1">
-                                        <p className="text-xs text-surface-500 uppercase tracking-wide">Description</p>
-                                        <p className="text-sm text-surface-200 mt-0.5 leading-relaxed">
+                                        <p className="text-xs text-gray-400 uppercase tracking-wide">Description</p>
+                                        <p className="text-sm text-gray-800 mt-0.5 leading-relaxed">
                                             {expense.description}
                                         </p>
                                     </div>
@@ -182,7 +182,7 @@ function ReviewContent() {
                                     <p className="text-xs font-semibold text-warning-500 uppercase tracking-wide mb-1">
                                         Flagged Reason
                                     </p>
-                                    <p className="text-sm text-surface-200">{expense.flaggedReason}</p>
+                                    <p className="text-sm text-gray-800">{expense.flaggedReason}</p>
                                 </div>
                             )}
                         </div>
@@ -197,7 +197,7 @@ function ReviewContent() {
                     {expense.travelRequestId && (
                         <Card>
                             <CardHeader title="Linked Travel Request" />
-                            <p className="text-sm text-surface-400">
+                            <p className="text-sm text-gray-500">
                                 This expense is linked to travel request{' '}
                                 <Link
                                     href={`/dashboard/travel/${expense.travelRequestId}`}

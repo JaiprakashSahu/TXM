@@ -62,8 +62,8 @@ export default function TravelListPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-100">Travel Requests</h1>
-          <p className="text-surface-400 mt-1">Manage your travel requests</p>
+          <h1 className="text-2xl font-bold text-gray-900">Travel Requests</h1>
+          <p className="text-gray-500 mt-1">Manage your travel requests</p>
         </div>
         <Link href="/dashboard/travel/new">
           <Button>
@@ -82,7 +82,7 @@ export default function TravelListPage() {
       {requests.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <p className="text-surface-400">No travel requests yet.</p>
+            <p className="text-gray-500">No travel requests yet.</p>
             <Link href="/dashboard/travel/new">
               <Button className="mt-4">Create your first request</Button>
             </Link>
@@ -95,7 +95,7 @@ export default function TravelListPage() {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="font-semibold text-surface-100">{request.destination}</h3>
+                    <h3 className="font-semibold text-gray-900">{request.destination}</h3>
                     <Badge variant={statusVariant[request.status]}>
                       {statusLabel[request.status]}
                     </Badge>
@@ -106,7 +106,7 @@ export default function TravelListPage() {
                       </Badge>
                     )}
                   </div>
-                  <div className="text-sm text-surface-400 space-y-1">
+                  <div className="text-sm text-gray-500 space-y-1">
                     <p>
                       {formatDate(request.startDate)} – {formatDate(request.endDate)}
                     </p>

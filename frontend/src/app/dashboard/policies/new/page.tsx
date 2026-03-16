@@ -79,13 +79,13 @@ function NewPolicyContent() {
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link href="/dashboard/policies">
-                    <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-800 hover:text-surface-100 transition-colors">
+                    <button className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-gray-900 transition-colors">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </Link>
                 <div>
-                    <h1 className="text-2xl font-bold text-surface-100">Create New Policy</h1>
-                    <p className="text-surface-400 mt-1">Define expense limits and allowed flight classes</p>
+                    <h1 className="text-2xl font-bold text-gray-900">Create New Policy</h1>
+                    <p className="text-gray-500 mt-1">Define expense limits and allowed flight classes</p>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@ function NewPolicyContent() {
 
                     {/* Flight Class Multi-Select */}
                     <div>
-                        <label className="block text-sm font-medium text-surface-200 mb-2">
+                        <label className="block text-sm font-medium text-gray-800 mb-2">
                             Allowed Flight Classes
                         </label>
                         <div className="flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ function NewPolicyContent() {
                                     onClick={() => toggleClass(cls)}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${selectedClasses.includes(cls)
                                             ? 'bg-primary-600/20 border-primary-500 text-primary-400'
-                                            : 'bg-surface-800 border-surface-700 text-surface-400 hover:border-surface-500'
+                                            : 'bg-white border-gray-200 text-gray-500 hover:border-gray-400'
                                         }`}
                                 >
                                     {cls.replace('_', ' ')}

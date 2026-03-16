@@ -43,7 +43,7 @@ export function ConfirmModal({
             onClick={!isLoading ? onCancel : undefined}
         >
             <div
-                className="bg-surface-800 border border-surface-700 rounded-xl shadow-xl w-full max-w-md mx-4 p-6"
+                className="bg-white border border-gray-200 rounded-xl shadow-xl w-full max-w-md mx-4 p-6"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex items-start gap-4">
@@ -51,8 +51,8 @@ export function ConfirmModal({
                         <AlertTriangle className={`h-5 w-5 ${variant === 'danger' ? 'text-danger-500' : 'text-primary-400'}`} />
                     </div>
                     <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-surface-100">{title}</h3>
-                        <p className="text-sm text-surface-400 mt-1">{message}</p>
+                        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+                        <p className="text-sm text-gray-500 mt-1">{message}</p>
                     </div>
                 </div>
                 <div className="flex justify-end gap-3 mt-6">

@@ -65,8 +65,8 @@ export default function UsersPage() {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-surface-50">Users Management</h1>
-                    <p className="text-sm text-surface-400">Manage system access and roles</p>
+                    <h1 className="text-2xl font-bold text-gray-900">Users Management</h1>
+                    <p className="text-sm text-gray-500">Manage system access and roles</p>
                 </div>
                 <Button onClick={() => setIsModalOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
@@ -74,54 +74,54 @@ export default function UsersPage() {
                 </Button>
             </div>
 
-            <div className="flex items-center gap-4 bg-surface-900 p-4 rounded-xl border border-surface-800">
+            <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-200">
                 <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                     <Input
                         placeholder="Search users..."
-                        className="pl-9 bg-surface-950 border-surface-700"
+                        className="pl-9 bg-gray-50 border-gray-200"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                 </div>
             </div>
 
-            <div className="bg-surface-900 rounded-xl border border-surface-800 overflow-hidden">
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-surface-950 border-b border-surface-800">
+                        <thead className="bg-gray-50 border-b border-gray-200">
                             <tr>
-                                <th className="px-6 py-4 text-xs font-semibold text-surface-400 uppercase tracking-wider">User</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-surface-400 uppercase tracking-wider">Role</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-surface-400 uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-surface-400 uppercase tracking-wider">Joined</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-surface-400 uppercase tracking-wider text-right">Actions</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">User</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Role</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Joined</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-surface-800">
+                        <tbody className="divide-y divide-gray-200">
                             {isLoading ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-8 text-center text-surface-400">
+                                    <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
                                         Loading users...
                                     </td>
                                 </tr>
                             ) : filteredUsers.length === 0 ? (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-8 text-center text-surface-400">
+                                    <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
                                         No users found
                                     </td>
                                 </tr>
                             ) : (
                                 filteredUsers.map((user) => (
-                                    <tr key={user._id} className="hover:bg-surface-800/50 transition-colors">
+                                    <tr key={user._id} className="hover:bg-white/50 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-surface-800 flex items-center justify-center text-surface-400">
+                                                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-500">
                                                     <UserIcon className="w-4 h-4" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm font-medium text-surface-100">{user.name}</p>
-                                                    <p className="text-xs text-surface-500">{user.email}</p>
+                                                    <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                                                    <p className="text-xs text-gray-400">{user.email}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -143,12 +143,12 @@ export default function UsersPage() {
                                                 </span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-surface-400">
+                                        <td className="px-6 py-4 text-sm text-gray-500">
                                             {format(new Date(user.createdAt), 'MMM d, yyyy')}
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <Button variant="ghost" size="sm">
-                                                <MoreVertical className="w-4 h-4 text-surface-400" />
+                                                <MoreVertical className="w-4 h-4 text-gray-500" />
                                             </Button>
                                         </td>
                                     </tr>

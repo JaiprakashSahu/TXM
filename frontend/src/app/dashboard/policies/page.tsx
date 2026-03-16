@@ -68,8 +68,8 @@ function PoliciesContent() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-100">Policies</h1>
-          <p className="text-surface-400 mt-1">Manage travel and expense policies</p>
+          <h1 className="text-2xl font-bold text-gray-900">Policies</h1>
+          <p className="text-gray-500 mt-1">Manage travel and expense policies</p>
         </div>
         <Link href="/dashboard/policies/new">
           <Button>
@@ -88,8 +88,8 @@ function PoliciesContent() {
       {policies.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <FileText className="h-12 w-12 text-surface-500 mx-auto mb-3" />
-            <p className="text-surface-400">No policies created yet.</p>
+            <FileText className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">No policies created yet.</p>
             <Link href="/dashboard/policies/new" className="text-primary-400 text-sm hover:underline mt-1 inline-block">
               Create your first policy →
             </Link>
@@ -99,26 +99,26 @@ function PoliciesContent() {
         <Card className="overflow-hidden p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-surface-700/50 border-b border-surface-700">
+              <thead className="bg-gray-100/50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Version</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Created</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-right text-xs font-semibold text-surface-300 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Version</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Created</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-surface-700">
+              <tbody className="divide-y divide-gray-200">
                 {policies.map((policy) => (
-                  <tr key={policy._id} className="hover:bg-surface-700/30 transition-colors">
+                  <tr key={policy._id} className="hover:bg-gray-100/30 transition-colors">
                     <td className="px-6 py-4">
-                      <p className="text-sm font-medium text-surface-100">{policy.name}</p>
+                      <p className="text-sm font-medium text-gray-900">{policy.name}</p>
                     </td>
                     <td className="px-6 py-4">
                       <Badge variant="neutral">v{policy.version}</Badge>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm text-surface-400">{formatDate(policy.createdAt)}</p>
+                      <p className="text-sm text-gray-500">{formatDate(policy.createdAt)}</p>
                     </td>
                     <td className="px-6 py-4">
                       {policy.isActive ? (

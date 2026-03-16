@@ -50,8 +50,8 @@ export default function NotificationsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-100">Notifications</h1>
-        <p className="text-surface-400 mt-1">Your recent notifications</p>
+        <h1 className="text-2xl font-bold text-gray-900">Notifications</h1>
+        <p className="text-gray-500 mt-1">Your recent notifications</p>
       </div>
 
       {error && (
@@ -63,8 +63,8 @@ export default function NotificationsPage() {
       {notifications.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <Bell className="h-12 w-12 text-surface-500 mx-auto mb-3" />
-            <p className="text-surface-400">No notifications yet.</p>
+            <Bell className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">No notifications yet.</p>
           </div>
         </Card>
       ) : (
@@ -74,7 +74,7 @@ export default function NotificationsPage() {
             return (
               <Card key={notification._id} className="p-4">
                 <div className="flex items-start gap-4">
-                  <div className="p-2 bg-surface-700 rounded-lg">
+                  <div className="p-2 bg-gray-100 rounded-lg">
                     <StatusIcon
                       className={`h-4 w-4 ${
                         notification.status === 'sent'
@@ -87,13 +87,13 @@ export default function NotificationsPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-medium text-surface-100 truncate">{notification.title}</h3>
+                      <h3 className="font-medium text-gray-900 truncate">{notification.title}</h3>
                       <Badge variant={statusVariant[notification.status]} className="flex-shrink-0">
                         {notification.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-surface-400 line-clamp-2">{notification.message}</p>
-                    <p className="text-xs text-surface-500 mt-2">
+                    <p className="text-sm text-gray-500 line-clamp-2">{notification.message}</p>
+                    <p className="text-xs text-gray-400 mt-2">
                       {formatDateTime(notification.createdAt)} • {notification.channel}
                     </p>
                   </div>

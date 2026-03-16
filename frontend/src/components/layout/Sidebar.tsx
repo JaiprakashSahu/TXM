@@ -6,9 +6,8 @@ import { useAuth } from '@/contexts';
 import { cn } from '@/lib/utils';
 import { UserRole } from '@/types';
 import {
-  Briefcase,
-  LayoutDashboard,
   Plane,
+  LayoutDashboard,
   Receipt,
   CalendarCheck,
   Bell,
@@ -19,6 +18,7 @@ import {
   ClipboardCheck,
   DollarSign,
   Users,
+  User,
 } from 'lucide-react';
 
 interface NavItem {
@@ -30,7 +30,6 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  // ── All Users ──
   {
     href: '/dashboard',
     label: 'Overview',
@@ -62,8 +61,6 @@ const navItems: NavItem[] = [
     icon: Bell,
     roles: ['employee', 'manager', 'admin'],
   },
-
-  // ── Manager ──
   {
     href: '/dashboard/manager/travel/pending',
     label: 'Travel Approvals',
@@ -77,8 +74,6 @@ const navItems: NavItem[] = [
     icon: CheckSquare,
     roles: ['manager', 'admin'],
   },
-
-  // ── Finance / Admin ──
   {
     href: '/dashboard/finance/expenses/pending',
     label: 'Expense Review',
@@ -122,18 +117,18 @@ export function Sidebar() {
   let lastSection: string | undefined;
 
   return (
-    <aside className="w-64 bg-surface-900 border-r border-surface-700 flex flex-col h-full">
+    <aside className="w-[250px] bg-gradient-to-b from-blue-900 via-blue-950 to-slate-950 flex flex-col h-screen sticky top-0">
       {/* Logo */}
-      <div className="h-16 flex items-center gap-3 px-6 border-b border-surface-700">
-        <div className="p-2 bg-primary-600 rounded-lg">
-          <Briefcase className="h-5 w-5 text-white" />
+      <div className="h-16 flex items-center gap-3 px-5">
+        <div className="w-8 h-8 bg-white/15 backdrop-blur-sm rounded-lg flex items-center justify-center">
+          <Plane className="h-4 w-4 text-white" />
         </div>
-        <span className="text-lg font-bold text-surface-100">ITILITE Lite</span>
+        <span className="text-lg font-bold text-white tracking-tight">ITILITE</span>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 py-4 px-3 overflow-y-auto">
-        <ul className="space-y-1">
+      <nav className="flex-1 py-2 px-3 overflow-y-auto">
+        <ul className="space-y-0.5">
           {filteredItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -147,30 +142,26 @@ export function Sidebar() {
             return (
               <li key={item.href}>
                 {showSection && (
-                  <p className="px-3 pt-5 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-surface-500">
+                  <p className="px-3 pt-5 pb-2 text-[10px] font-semibold uppercase tracking-widest text-blue-300/40">
                     {item.section}
                   </p>
                 )}
                 {isDisabled ? (
-                  <div
-                    className={cn(
-                      'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium opacity-50 cursor-not-allowed text-surface-600'
-                    )}
-                  >
-                    <item.icon className="h-5 w-5 flex-shrink-0" />
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium opacity-30 cursor-not-allowed text-blue-200/50">
+                    <item.icon className="h-[18px] w-[18px] flex-shrink-0" />
                     <span>{item.label}</span>
                   </div>
                 ) : (
                   <Link
                     href={item.href}
                     className={cn(
-                      'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors duration-150',
+                      'flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150',
                       isActive
-                        ? 'bg-primary-600/20 text-primary-400'
-                        : 'text-surface-400 hover:bg-surface-800 hover:text-surface-100'
+                        ? 'bg-white/15 text-white'
+                        : 'text-blue-100/60 hover:bg-white/10 hover:text-white'
                     )}
                   >
-                    <item.icon className="h-5 w-5 flex-shrink-0" />
+                    <item.icon className="h-[18px] w-[18px] flex-shrink-0" />
                     <span>{item.label}</span>
                   </Link>
                 )}
@@ -180,11 +171,20 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-surface-700">
-        <p className="text-xs text-surface-500 text-center">
-          Travel & Expense Management
-        </p>
+      {/* User Footer */}
+      <div className="p-3 border-t border-white/10">
+        <Link
+          href="/dashboard/profile"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
+        >
+          <div className="w-8 h-8 bg-blue-400/20 rounded-full flex items-center justify-center">
+            <User className="h-4 w-4 text-blue-200" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white truncate">{user?.name}</p>
+            <p className="text-[11px] text-blue-300/50 capitalize">{role}</p>
+          </div>
+        </Link>
       </div>
     </aside>
   );

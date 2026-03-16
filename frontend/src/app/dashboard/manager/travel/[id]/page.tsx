@@ -90,7 +90,7 @@ function ReviewContent() {
     if (!request) {
         return (
             <div className="text-center py-12">
-                <p className="text-surface-400">Travel request not found.</p>
+                <p className="text-gray-500">Travel request not found.</p>
             </div>
         );
     }
@@ -103,13 +103,13 @@ function ReviewContent() {
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link href="/dashboard/manager/travel/pending">
-                    <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-800 hover:text-surface-100 transition-colors">
+                    <button className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-gray-900 transition-colors">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </Link>
                 <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-surface-100">Review Travel Request</h1>
-                    <p className="text-surface-400 mt-1">Submitted by {employee.name}</p>
+                    <h1 className="text-2xl font-bold text-gray-900">Review Travel Request</h1>
+                    <p className="text-gray-500 mt-1">Submitted by {employee.name}</p>
                 </div>
                 <StatusBadge status={request.status} />
             </div>
@@ -138,8 +138,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <MapPin className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Destination</p>
-                                    <p className="text-lg font-semibold text-surface-100 mt-0.5">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Destination</p>
+                                    <p className="text-lg font-semibold text-gray-900 mt-0.5">
                                         {request.destination}
                                     </p>
                                 </div>
@@ -148,8 +148,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <Calendar className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Travel Dates</p>
-                                    <p className="text-sm text-surface-200 mt-0.5">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Travel Dates</p>
+                                    <p className="text-sm text-gray-800 mt-0.5">
                                         {formatDate(request.startDate)} – {formatDate(request.endDate)}
                                     </p>
                                 </div>
@@ -158,8 +158,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <DollarSign className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div>
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Estimated Cost</p>
-                                    <p className="text-lg font-semibold text-surface-100 mt-0.5">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Estimated Cost</p>
+                                    <p className="text-lg font-semibold text-gray-900 mt-0.5">
                                         {formatCurrency(request.estimatedCost)}
                                     </p>
                                 </div>
@@ -168,8 +168,8 @@ function ReviewContent() {
                             <div className="flex items-start gap-3">
                                 <FileText className="h-5 w-5 text-primary-400 mt-0.5" />
                                 <div className="flex-1">
-                                    <p className="text-xs text-surface-500 uppercase tracking-wide">Purpose</p>
-                                    <p className="text-sm text-surface-200 mt-0.5 leading-relaxed">
+                                    <p className="text-xs text-gray-400 uppercase tracking-wide">Purpose</p>
+                                    <p className="text-sm text-gray-800 mt-0.5 leading-relaxed">
                                         {request.purpose}
                                     </p>
                                 </div>
@@ -224,28 +224,28 @@ function PolicySnapshotTable({ policy }: { policy: PolicyRules }) {
     return (
         <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-                <span className="text-surface-400">Max Flight Cost</span>
-                <span className="text-surface-200 font-medium">{formatCurrency(policy.maxFlightCost)}</span>
+                <span className="text-gray-500">Max Flight Cost</span>
+                <span className="text-gray-800 font-medium">{formatCurrency(policy.maxFlightCost)}</span>
             </div>
             <div className="flex justify-between">
-                <span className="text-surface-400">Max Hotel/Day</span>
-                <span className="text-surface-200 font-medium">{formatCurrency(policy.maxHotelPerDay)}</span>
+                <span className="text-gray-500">Max Hotel/Day</span>
+                <span className="text-gray-800 font-medium">{formatCurrency(policy.maxHotelPerDay)}</span>
             </div>
             <div className="flex justify-between">
-                <span className="text-surface-400">Max Daily Food</span>
-                <span className="text-surface-200 font-medium">{formatCurrency(policy.maxDailyFood)}</span>
+                <span className="text-gray-500">Max Daily Food</span>
+                <span className="text-gray-800 font-medium">{formatCurrency(policy.maxDailyFood)}</span>
             </div>
             <div className="flex justify-between">
-                <span className="text-surface-400">Max Trip Total</span>
-                <span className="text-surface-200 font-medium">{formatCurrency(policy.maxTripTotal)}</span>
+                <span className="text-gray-500">Max Trip Total</span>
+                <span className="text-gray-800 font-medium">{formatCurrency(policy.maxTripTotal)}</span>
             </div>
-            <div className="pt-2 border-t border-surface-700">
-                <p className="text-surface-400 mb-1">Allowed Flight Classes</p>
+            <div className="pt-2 border-t border-gray-200">
+                <p className="text-gray-500 mb-1">Allowed Flight Classes</p>
                 <div className="flex flex-wrap gap-1">
                     {policy.allowedFlightClasses.map((cls) => (
                         <span
                             key={cls}
-                            className="px-2 py-0.5 bg-surface-700 text-surface-300 rounded text-xs"
+                            className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs"
                         >
                             {cls}
                         </span>

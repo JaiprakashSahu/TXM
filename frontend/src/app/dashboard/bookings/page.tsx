@@ -50,8 +50,8 @@ export default function BookingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-100">Bookings</h1>
-        <p className="text-surface-400 mt-1">View your confirmed travel bookings</p>
+        <h1 className="text-2xl font-bold text-gray-900">Bookings</h1>
+        <p className="text-gray-500 mt-1">View your confirmed travel bookings</p>
       </div>
 
       {error && (
@@ -63,9 +63,9 @@ export default function BookingsPage() {
       {bookings.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <CalendarCheck className="h-12 w-12 text-surface-500 mx-auto mb-3" />
-            <p className="text-surface-400">No bookings yet.</p>
-            <p className="text-sm text-surface-500 mt-1">
+            <CalendarCheck className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">No bookings yet.</p>
+            <p className="text-sm text-gray-400 mt-1">
               Bookings will appear here once your travel requests are approved and booked.
             </p>
           </div>
@@ -77,20 +77,20 @@ export default function BookingsPage() {
             return (
               <Card key={booking._id}>
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-surface-700 rounded-xl">
+                  <div className="p-3 bg-gray-100 rounded-xl">
                     <Icon className="h-5 w-5 text-primary-400" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-semibold text-surface-100 capitalize">{booking.type}</h3>
+                      <h3 className="font-semibold text-gray-900 capitalize">{booking.type}</h3>
                       <Badge variant={statusVariant[booking.status]}>
                         {booking.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-surface-400">
+                    <p className="text-sm text-gray-500">
                       Inventory: {booking.inventoryId}
                     </p>
-                    <p className="text-lg font-semibold text-surface-100 mt-2">
+                    <p className="text-lg font-semibold text-gray-900 mt-2">
                       {formatCurrency(booking.price, booking.currency)}
                     </p>
                     {booking.confirmedAt && (

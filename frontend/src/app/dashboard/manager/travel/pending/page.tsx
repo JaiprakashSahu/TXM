@@ -58,8 +58,8 @@ function PendingContent() {
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-2xl font-bold text-surface-100">Travel Approvals</h1>
-                <p className="text-surface-400 mt-1">Review and approve travel requests from your team</p>
+                <h1 className="text-2xl font-bold text-gray-900">Travel Approvals</h1>
+                <p className="text-gray-500 mt-1">Review and approve travel requests from your team</p>
             </div>
 
             {error && (
@@ -71,8 +71,8 @@ function PendingContent() {
             {requests.length === 0 ? (
                 <Card>
                     <div className="text-center py-8">
-                        <p className="text-surface-400">No pending travel requests.</p>
-                        <p className="text-sm text-surface-500 mt-1">All requests have been reviewed.</p>
+                        <p className="text-gray-500">No pending travel requests.</p>
+                        <p className="text-sm text-gray-400 mt-1">All requests have been reviewed.</p>
                     </div>
                 </Card>
             ) : (
@@ -81,32 +81,32 @@ function PendingContent() {
                     <Card className="overflow-hidden p-0">
                         <div className="overflow-x-auto">
                             <table className="w-full">
-                                <thead className="bg-surface-700/50 border-b border-surface-700">
+                                <thead className="bg-gray-100/50 border-b border-gray-200">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Employee
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Destination
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Dates
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Est. Cost
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Submitted
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Violations
                                         </th>
-                                        <th className="px-6 py-3 text-right text-xs font-semibold text-surface-300 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             Actions
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-surface-700">
+                                <tbody className="divide-y divide-gray-200">
                                     {requests.map((request) => {
                                         const employee =
                                             typeof request.userId === 'object'
@@ -114,28 +114,28 @@ function PendingContent() {
                                                 : { name: 'Unknown', email: '' };
 
                                         return (
-                                            <tr key={request._id} className="hover:bg-surface-700/30 transition-colors">
+                                            <tr key={request._id} className="hover:bg-gray-100/30 transition-colors">
                                                 <td className="px-6 py-4">
                                                     <UserChip name={employee.name} email={employee.email} size="sm" />
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <p className="text-sm font-medium text-surface-100">{request.destination}</p>
+                                                    <p className="text-sm font-medium text-gray-900">{request.destination}</p>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <p className="text-sm text-surface-300">
+                                                    <p className="text-sm text-gray-700">
                                                         {formatDate(request.startDate)}
                                                     </p>
-                                                    <p className="text-xs text-surface-500">
+                                                    <p className="text-xs text-gray-400">
                                                         to {formatDate(request.endDate)}
                                                     </p>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <p className="text-sm font-medium text-surface-200">
+                                                    <p className="text-sm font-medium text-gray-800">
                                                         {formatCurrency(request.estimatedCost)}
                                                     </p>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <p className="text-sm text-surface-400">
+                                                    <p className="text-sm text-gray-500">
                                                         {formatDate(request.createdAt)}
                                                     </p>
                                                 </td>
@@ -146,7 +146,7 @@ function PendingContent() {
                                                             {request.violations.length}
                                                         </Badge>
                                                     ) : (
-                                                        <span className="text-xs text-surface-500">None</span>
+                                                        <span className="text-xs text-gray-400">None</span>
                                                     )}
                                                 </td>
                                                 <td className="px-6 py-4 text-right">
@@ -168,7 +168,7 @@ function PendingContent() {
                     {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="flex items-center justify-between">
-                            <p className="text-sm text-surface-400">
+                            <p className="text-sm text-gray-500">
                                 Page {page} of {totalPages}
                             </p>
                             <div className="flex gap-2">

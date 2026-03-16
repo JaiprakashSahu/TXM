@@ -135,16 +135,16 @@ function AnalyticsContent() {
       label: 'Total Count',
       value: summary?.totalCount || 0,
       icon: AlertTriangle,
-      color: 'text-surface-300',
-      bg: 'bg-surface-700',
+      color: 'text-gray-700',
+      bg: 'bg-gray-100',
     },
   ];
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-100">Analytics Dashboard</h1>
-        <p className="text-surface-400 mt-1">Organization-wide spend and performance insights</p>
+        <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
+        <p className="text-gray-500 mt-1">Organization-wide spend and performance insights</p>
       </div>
 
       {/* Summary Cards */}
@@ -156,8 +156,8 @@ function AnalyticsContent() {
                 <card.icon className={`h-5 w-5 ${card.color}`} />
               </div>
               <div className="min-w-0">
-                <p className="text-xs text-surface-500 uppercase tracking-wide">{card.label}</p>
-                <p className="text-xl font-bold text-surface-100 mt-0.5 truncate">{card.value}</p>
+                <p className="text-xs text-gray-400 uppercase tracking-wide">{card.label}</p>
+                <p className="text-xl font-bold text-gray-900 mt-0.5 truncate">{card.value}</p>
               </div>
             </div>
           </Card>
@@ -205,7 +205,7 @@ function AnalyticsContent() {
             </ResponsiveContainer>
           </div>
         ) : (
-          <p className="text-surface-500 text-sm py-8 text-center">No data available</p>
+          <p className="text-gray-400 text-sm py-8 text-center">No data available</p>
         )}
       </Card>
 
@@ -251,7 +251,7 @@ function AnalyticsContent() {
               </ResponsiveContainer>
             </div>
           ) : (
-            <p className="text-surface-500 text-sm py-8 text-center">No data available</p>
+            <p className="text-gray-400 text-sm py-8 text-center">No data available</p>
           )}
         </Card>
 
@@ -292,7 +292,7 @@ function AnalyticsContent() {
               </ResponsiveContainer>
             </div>
           ) : (
-            <p className="text-surface-500 text-sm py-8 text-center">No violations recorded</p>
+            <p className="text-gray-400 text-sm py-8 text-center">No violations recorded</p>
           )}
         </Card>
       </div>
@@ -305,30 +305,30 @@ function AnalyticsContent() {
         {spenders.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-surface-700/50 border-y border-surface-700">
+              <thead className="bg-gray-100/50 border-y border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">User</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Total Spend</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Expenses</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">User</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Email</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Total Spend</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Expenses</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-surface-700">
+              <tbody className="divide-y divide-gray-200">
                 {spenders.map((s, i) => (
-                  <tr key={i} className="hover:bg-surface-700/30 transition-colors">
+                  <tr key={i} className="hover:bg-gray-100/30 transition-colors">
                     <td className="px-6 py-3">
                       <UserChip name={s.name} email={s.email} size="sm" />
                     </td>
-                    <td className="px-6 py-3 text-sm text-surface-400">{s.email}</td>
-                    <td className="px-6 py-3 text-sm font-semibold text-surface-100">{formatCurrency(s.totalAmount)}</td>
-                    <td className="px-6 py-3 text-sm text-surface-300">{s.expenseCount}</td>
+                    <td className="px-6 py-3 text-sm text-gray-500">{s.email}</td>
+                    <td className="px-6 py-3 text-sm font-semibold text-gray-900">{formatCurrency(s.totalAmount)}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">{s.expenseCount}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <p className="text-surface-500 text-sm py-8 text-center">No data</p>
+          <p className="text-gray-400 text-sm py-8 text-center">No data</p>
         )}
       </Card>
 
@@ -340,25 +340,25 @@ function AnalyticsContent() {
         {managers.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-surface-700/50 border-y border-surface-700">
+              <thead className="bg-gray-100/50 border-y border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Manager</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Approvals</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Rejections</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Total</th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-surface-300 uppercase tracking-wider">Avg. Approval Time</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Manager</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Approvals</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Rejections</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Total</th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Avg. Approval Time</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-surface-700">
+              <tbody className="divide-y divide-gray-200">
                 {managers.map((m, i) => (
-                  <tr key={i} className="hover:bg-surface-700/30 transition-colors">
+                  <tr key={i} className="hover:bg-gray-100/30 transition-colors">
                     <td className="px-6 py-3">
                       <UserChip name={m.name} email={m.email} size="sm" />
                     </td>
                     <td className="px-6 py-3 text-sm text-success-500 font-semibold">{m.approvedCount}</td>
                     <td className="px-6 py-3 text-sm text-danger-500 font-semibold">{m.rejectedCount}</td>
-                    <td className="px-6 py-3 text-sm text-surface-200">{m.totalDecisions}</td>
-                    <td className="px-6 py-3 text-sm text-surface-300">
+                    <td className="px-6 py-3 text-sm text-gray-800">{m.totalDecisions}</td>
+                    <td className="px-6 py-3 text-sm text-gray-700">
                       {m.avgApprovalTimeHours !== null ? `${m.avgApprovalTimeHours}h` : '—'}
                     </td>
                   </tr>
@@ -367,7 +367,7 @@ function AnalyticsContent() {
             </table>
           </div>
         ) : (
-          <p className="text-surface-500 text-sm py-8 text-center">No data</p>
+          <p className="text-gray-400 text-sm py-8 text-center">No data</p>
         )}
       </Card>
     </div>

@@ -70,7 +70,7 @@ function DetailContent() {
     if (!policy) {
         return (
             <div className="text-center py-12">
-                <p className="text-surface-400">{error || 'Policy not found.'}</p>
+                <p className="text-gray-500">{error || 'Policy not found.'}</p>
             </div>
         );
     }
@@ -87,13 +87,13 @@ function DetailContent() {
             {/* Header */}
             <div className="flex items-center gap-4">
                 <Link href="/dashboard/policies">
-                    <button className="p-2 rounded-lg text-surface-400 hover:bg-surface-800 hover:text-surface-100 transition-colors">
+                    <button className="p-2 rounded-lg text-gray-500 hover:bg-white hover:text-gray-900 transition-colors">
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </Link>
                 <div className="flex-1">
                     <div className="flex items-center gap-3">
-                        <h1 className="text-2xl font-bold text-surface-100">{policy.name}</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">{policy.name}</h1>
                         <Badge variant="neutral">v{policy.version}</Badge>
                         {policy.isActive && (
                             <Badge variant="success">
@@ -102,7 +102,7 @@ function DetailContent() {
                             </Badge>
                         )}
                     </div>
-                    <p className="text-surface-400 mt-1">Created {formatDate(policy.createdAt)}</p>
+                    <p className="text-gray-500 mt-1">Created {formatDate(policy.createdAt)}</p>
                 </div>
                 {!policy.isActive && (
                     <Button onClick={() => setShowActivate(true)}>
@@ -118,8 +118,8 @@ function DetailContent() {
                 <div className="grid grid-cols-2 gap-6 mt-2">
                     {rules.map((rule) => (
                         <div key={rule.label}>
-                            <p className="text-xs text-surface-500 uppercase tracking-wide">{rule.label}</p>
-                            <p className="text-xl font-bold text-surface-100 mt-1">{rule.value}</p>
+                            <p className="text-xs text-gray-400 uppercase tracking-wide">{rule.label}</p>
+                            <p className="text-xl font-bold text-gray-900 mt-1">{rule.value}</p>
                         </div>
                     ))}
                 </div>
@@ -145,21 +145,21 @@ function DetailContent() {
                 <CardHeader title="Metadata" />
                 <div className="space-y-2 text-sm mt-2">
                     <div className="flex justify-between">
-                        <span className="text-surface-400">Policy ID</span>
-                        <span className="text-surface-300 font-mono text-xs">{policy._id}</span>
+                        <span className="text-gray-500">Policy ID</span>
+                        <span className="text-gray-700 font-mono text-xs">{policy._id}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-surface-400">Version</span>
-                        <span className="text-surface-200">{policy.version}</span>
+                        <span className="text-gray-500">Version</span>
+                        <span className="text-gray-800">{policy.version}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-surface-400">Status</span>
-                        <span className="text-surface-200">{policy.isActive ? 'Active' : 'Draft'}</span>
+                        <span className="text-gray-500">Status</span>
+                        <span className="text-gray-800">{policy.isActive ? 'Active' : 'Draft'}</span>
                     </div>
                     {policy.activatedAt && (
                         <div className="flex justify-between">
-                            <span className="text-surface-400">Activated At</span>
-                            <span className="text-surface-200">{formatDate(policy.activatedAt)}</span>
+                            <span className="text-gray-500">Activated At</span>
+                            <span className="text-gray-800">{formatDate(policy.activatedAt)}</span>
                         </div>
                     )}
                 </div>
