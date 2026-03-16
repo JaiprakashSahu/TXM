@@ -12,7 +12,6 @@ router.post('/logout', asyncWrapper((req, res) => authController.logout(req, res
 
 // Protected routes
 router.get('/profile', authenticate, asyncWrapper((req, res) => authController.profile(req, res)));
-router.get('/profile', authenticate, asyncWrapper((req, res) => authController.profile(req, res)));
 router.get('/managers', authenticate, asyncWrapper((req, res) => authController.listManagers(req, res)));
 router.post('/change-password', authenticate, asyncWrapper((req, res) => authController.changePassword(req, res)));
 
