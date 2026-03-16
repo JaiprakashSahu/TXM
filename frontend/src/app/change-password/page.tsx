@@ -58,11 +58,11 @@ export default function ChangePasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-surface-950 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
             <Card className="w-full max-w-md p-6 space-y-6">
                 <div className="text-center space-y-2">
-                    <h1 className="text-2xl font-bold text-surface-50">Change Password</h1>
-                    <p className="text-sm text-surface-400">
+                    <h1 className="text-2xl font-bold text-gray-900">Change Password</h1>
+                    <p className="text-sm text-gray-500">
                         For security reasons, you must change your password to continue.
                     </p>
                 </div>
@@ -75,7 +75,7 @@ export default function ChangePasswordPage() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">Current Password</label>
+                        <label className="text-sm font-medium text-gray-800">Current Password</label>
                         <Input
                             type="password"
                             value={oldPassword}
@@ -86,7 +86,7 @@ export default function ChangePasswordPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">New Password</label>
+                        <label className="text-sm font-medium text-gray-800">New Password</label>
                         <Input
                             type="password"
                             value={newPassword}
@@ -97,7 +97,7 @@ export default function ChangePasswordPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">Confirm New Password</label>
+                        <label className="text-sm font-medium text-gray-800">Confirm New Password</label>
                         <Input
                             type="password"
                             value={confirmPassword}

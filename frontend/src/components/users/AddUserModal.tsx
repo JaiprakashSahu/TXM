@@ -68,21 +68,21 @@ export function AddUserModal({ isOpen, onClose, onSuccess }: AddUserModalProps) 
     if (tempPassword) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                <div className="bg-surface-900 border border-surface-700 rounded-xl w-full max-w-md p-6 shadow-2xl">
+                <div className="bg-white border border-gray-200 rounded-xl w-full max-w-md p-6 shadow-2xl">
                     <div className="text-center space-y-4">
                         <div className="mx-auto w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
                             <Check className="w-6 h-6 text-green-500" />
                         </div>
-                        <h2 className="text-xl font-bold text-surface-50">User Created Successfully</h2>
-                        <p className="text-sm text-surface-400">
+                        <h2 className="text-xl font-bold text-gray-900">User Created Successfully</h2>
+                        <p className="text-sm text-gray-500">
                             Share this temporary password with the user. They will be required to change it on first login.
                         </p>
 
-                        <div className="bg-surface-950 border border-surface-800 rounded-lg p-4 flex items-center justify-between gap-2">
+                        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center justify-between gap-2">
                             <code className="text-primary-400 font-mono text-lg">{tempPassword}</code>
                             <button
                                 onClick={copyToClipboard}
-                                className="p-2 hover:bg-surface-800 rounded-lg transition-colors text-surface-400 hover:text-surface-200"
+                                className="p-2 hover:bg-white rounded-lg transition-colors text-gray-500 hover:text-gray-800"
                                 title="Copy to clipboard"
                             >
                                 {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
@@ -100,12 +100,12 @@ export function AddUserModal({ isOpen, onClose, onSuccess }: AddUserModalProps) 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="bg-surface-900 border border-surface-700 rounded-xl w-full max-w-md shadow-2xl">
-                <div className="flex items-center justify-between p-6 border-b border-surface-800">
-                    <h2 className="text-xl font-bold text-surface-50">Add New User</h2>
+            <div className="bg-white border border-gray-200 rounded-xl w-full max-w-md shadow-2xl">
+                <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h2 className="text-xl font-bold text-gray-900">Add New User</h2>
                     <button
                         onClick={handleClose}
-                        className="text-surface-400 hover:text-surface-200 transition-colors"
+                        className="text-gray-500 hover:text-gray-800 transition-colors"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -119,7 +119,7 @@ export function AddUserModal({ isOpen, onClose, onSuccess }: AddUserModalProps) 
                     )}
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">Full Name</label>
+                        <label className="text-sm font-medium text-gray-800">Full Name</label>
                         <Input
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -129,7 +129,7 @@ export function AddUserModal({ isOpen, onClose, onSuccess }: AddUserModalProps) 
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">Email Address</label>
+                        <label className="text-sm font-medium text-gray-800">Email Address</label>
                         <Input
                             type="email"
                             value={email}
@@ -140,7 +140,7 @@ export function AddUserModal({ isOpen, onClose, onSuccess }: AddUserModalProps) 
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-surface-200">Role</label>
+                        <label className="text-sm font-medium text-gray-800">Role</label>
                         <Select
                             value={role}
                             onChange={(e) => setRole(e.target.value as UserRole)}

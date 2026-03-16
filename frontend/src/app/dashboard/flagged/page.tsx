@@ -72,8 +72,8 @@ function FlaggedContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-100">Flagged Expenses</h1>
-        <p className="text-surface-400 mt-1">Review expenses flagged for policy violations</p>
+        <h1 className="text-2xl font-bold text-gray-900">Flagged Expenses</h1>
+        <p className="text-gray-500 mt-1">Review expenses flagged for policy violations</p>
       </div>
 
       {error && (
@@ -86,8 +86,8 @@ function FlaggedContent() {
         <Card>
           <div className="text-center py-8">
             <CheckCircle className="h-12 w-12 text-success-500 mx-auto mb-3" />
-            <p className="text-surface-400">No flagged expenses to review.</p>
-            <p className="text-sm text-surface-500 mt-1">All expenses are in compliance.</p>
+            <p className="text-gray-500">No flagged expenses to review.</p>
+            <p className="text-sm text-gray-400 mt-1">All expenses are in compliance.</p>
           </div>
         </Card>
       ) : (
@@ -106,10 +106,10 @@ function FlaggedContent() {
                       <Badge variant="neutral">{categoryLabel[expense.category]}</Badge>
                       <Badge variant="warning">Flagged</Badge>
                     </div>
-                    <p className="text-lg font-semibold text-surface-100">
+                    <p className="text-lg font-semibold text-gray-900">
                       {formatCurrency(expense.amount)}
                     </p>
-                    <p className="text-sm text-surface-400 mt-1">
+                    <p className="text-sm text-gray-500 mt-1">
                       {formatDate(expense.expenseDate)}
                       {expense.description && ` • ${expense.description}`}
                     </p>
@@ -120,14 +120,14 @@ function FlaggedContent() {
                         <AlertTriangle className="h-4 w-4 text-warning-500 mt-0.5" />
                         <div>
                           <p className="text-sm font-medium text-warning-500">Flagged Reason</p>
-                          <p className="text-sm text-surface-300 mt-1">{expense.flaggedReason}</p>
+                          <p className="text-sm text-gray-700 mt-1">{expense.flaggedReason}</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Violations */}
                     {expense.violations.length > 0 && (
-                      <div className="mt-2 text-sm text-surface-400">
+                      <div className="mt-2 text-sm text-gray-500">
                         <p className="font-medium mb-1">Violations:</p>
                         <ul className="space-y-1">
                           {expense.violations.map((v, i) => (

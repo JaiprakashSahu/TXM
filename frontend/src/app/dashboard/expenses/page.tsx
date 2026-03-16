@@ -101,8 +101,8 @@ export default function ExpensesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-100">Expenses</h1>
-          <p className="text-surface-400 mt-1">Track and submit your travel expenses</p>
+          <h1 className="text-2xl font-bold text-gray-900">Expenses</h1>
+          <p className="text-gray-500 mt-1">Track and submit your travel expenses</p>
         </div>
         <Button onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4" />
@@ -173,7 +173,7 @@ export default function ExpensesPage() {
             <div>
               <label className="label">Receipt</label>
               <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2 px-4 py-2.5 bg-surface-700 text-surface-100 rounded-xl cursor-pointer hover:bg-surface-600 transition-colors">
+                <label className="flex items-center gap-2 px-4 py-2.5 bg-gray-100 text-gray-900 rounded-xl cursor-pointer hover:bg-gray-200 transition-colors">
                   <Upload className="h-4 w-4" />
                   <span className="text-sm">{receipt ? receipt.name : 'Upload receipt'}</span>
                   <input
@@ -201,8 +201,8 @@ export default function ExpensesPage() {
       {expenses.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <Receipt className="h-12 w-12 text-surface-500 mx-auto mb-3" />
-            <p className="text-surface-400">No expenses submitted yet.</p>
+            <Receipt className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">No expenses submitted yet.</p>
           </div>
         </Card>
       ) : (
@@ -221,10 +221,10 @@ export default function ExpensesPage() {
                       </Badge>
                     )}
                   </div>
-                  <p className="text-lg font-semibold text-surface-100">
+                  <p className="text-lg font-semibold text-gray-900">
                     {formatCurrency(expense.amount)}
                   </p>
-                  <p className="text-sm text-surface-400 mt-1">
+                  <p className="text-sm text-gray-500 mt-1">
                     {formatDate(expense.expenseDate)}
                     {expense.description && ` • ${expense.description}`}
                   </p>

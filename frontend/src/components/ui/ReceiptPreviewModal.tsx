@@ -38,19 +38,19 @@ export function ReceiptPreviewModal({ url, isOpen, onClose }: ReceiptPreviewModa
             onClick={onClose}
         >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-surface-950/80" />
+            <div className="absolute inset-0 bg-gray-50/80" />
 
             {/* Modal */}
             <div
-                className="relative bg-surface-800 border border-surface-700 rounded-xl shadow-xl max-w-3xl w-full mx-4 max-h-[85vh] flex flex-col"
+                className="relative bg-white border border-gray-200 rounded-xl shadow-xl max-w-3xl w-full mx-4 max-h-[85vh] flex flex-col"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 border-b border-surface-700">
-                    <h3 className="text-sm font-semibold text-surface-100">Receipt Preview</h3>
+                <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                    <h3 className="text-sm font-semibold text-gray-900">Receipt Preview</h3>
                     <button
                         onClick={onClose}
-                        className="p-1.5 rounded-lg text-surface-400 hover:bg-surface-700 hover:text-surface-100 transition-colors"
+                        className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors"
                     >
                         <X className="h-4 w-4" />
                     </button>
@@ -61,7 +61,7 @@ export function ReceiptPreviewModal({ url, isOpen, onClose }: ReceiptPreviewModa
                     {isPdf ? (
                         <iframe
                             src={url}
-                            className="w-full h-[70vh] rounded-lg border border-surface-700"
+                            className="w-full h-[70vh] rounded-lg border border-gray-200"
                             title="Receipt PDF"
                         />
                     ) : (

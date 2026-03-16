@@ -79,8 +79,8 @@ export default function NewTravelRequestPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-surface-100">New Travel Request</h1>
-          <p className="text-surface-400 mt-1">Create a new travel request for approval</p>
+          <h1 className="text-2xl font-bold text-gray-900">New Travel Request</h1>
+          <p className="text-gray-500 mt-1">Create a new travel request for approval</p>
         </div>
       </div>
 

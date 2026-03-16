@@ -13,32 +13,32 @@ export function AuditTimeline({ logs, className }: AuditTimelineProps) {
     return (
         <div className={className}>
             <div className="flex items-center gap-2 mb-4">
-                <Clock className="h-4 w-4 text-surface-400" />
-                <h4 className="text-sm font-semibold text-surface-100">Audit Trail</h4>
+                <Clock className="h-4 w-4 text-gray-500" />
+                <h4 className="text-sm font-semibold text-gray-900">Audit Trail</h4>
             </div>
             <div className="relative pl-6 space-y-4">
                 {/* Vertical line */}
-                <div className="absolute left-[7px] top-1 bottom-1 w-px bg-surface-700" />
+                <div className="absolute left-[7px] top-1 bottom-1 w-px bg-gray-100" />
 
                 {logs.map((log, i) => (
                     <div key={i} className="relative">
                         {/* Dot */}
-                        <div className="absolute -left-6 top-1.5 h-3 w-3 rounded-full border-2 border-surface-600 bg-surface-800" />
+                        <div className="absolute -left-6 top-1.5 h-3 w-3 rounded-full border-2 border-gray-300 bg-white" />
 
                         <div>
                             <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-sm font-medium text-surface-200">
+                                <span className="text-sm font-medium text-gray-800">
                                     {log.action}
                                 </span>
-                                <span className="text-xs text-surface-500">
+                                <span className="text-xs text-gray-400">
                                     by {log.actorRole}
                                 </span>
                             </div>
-                            <p className="text-xs text-surface-500 mt-0.5">
+                            <p className="text-xs text-gray-400 mt-0.5">
                                 {formatDateTime(log.timestamp)}
                             </p>
                             {log.note && (
-                                <p className="text-sm text-surface-400 mt-1 pl-3 border-l-2 border-surface-700">
+                                <p className="text-sm text-gray-500 mt-1 pl-3 border-l-2 border-gray-200">
                                     {log.note}
                                 </p>
                             )}

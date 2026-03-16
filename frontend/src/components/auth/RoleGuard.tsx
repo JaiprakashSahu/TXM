@@ -31,9 +31,9 @@ export function RoleGuard({ children, allowedRoles, fallbackUrl = '/dashboard' }
   if (!hasAccess) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
-        <ShieldX className="h-12 w-12 text-surface-500 mb-4" />
-        <h2 className="text-lg font-semibold text-surface-300">Access Denied</h2>
-        <p className="text-sm text-surface-500 mt-1">
+        <ShieldX className="h-12 w-12 text-gray-400 mb-4" />
+        <h2 className="text-lg font-semibold text-gray-700">Access Denied</h2>
+        <p className="text-sm text-gray-400 mt-1">
           You don't have permission to view this page.
         </p>
       </div>

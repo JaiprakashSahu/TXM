@@ -20,7 +20,7 @@ export default function HomePage() {
   }, [isAuthenticated, isLoading, router]);
 
   return (
-    <div className="min-h-screen bg-surface-950 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <Spinner size="lg" />
     </div>
   );

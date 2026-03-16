@@ -80,7 +80,7 @@ export default function TravelDetailPage() {
   if (!request) {
     return (
       <div className="text-center py-12">
-        <p className="text-surface-400">Travel request not found.</p>
+        <p className="text-gray-500">Travel request not found.</p>
         <Link href="/dashboard/travel">
           <Button className="mt-4">Back to Travel Requests</Button>
         </Link>
@@ -97,8 +97,8 @@ export default function TravelDetailPage() {
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-surface-100">{request.destination}</h1>
-          <p className="text-surface-400 mt-1">Travel Request Details</p>
+          <h1 className="text-2xl font-bold text-gray-900">{request.destination}</h1>
+          <p className="text-gray-500 mt-1">Travel Request Details</p>
         </div>
         <Badge variant={statusVariant[request.status]}>{statusLabel[request.status]}</Badge>
       </div>
@@ -114,36 +114,36 @@ export default function TravelDetailPage() {
         <CardHeader title="Trip Details" />
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-surface-500">Destination</p>
-            <p className="text-surface-100 font-medium">{request.destination}</p>
+            <p className="text-gray-400">Destination</p>
+            <p className="text-gray-900 font-medium">{request.destination}</p>
           </div>
           <div>
-            <p className="text-surface-500">Estimated Cost</p>
-            <p className="text-surface-100 font-medium">{formatCurrency(request.estimatedCost)}</p>
+            <p className="text-gray-400">Estimated Cost</p>
+            <p className="text-gray-900 font-medium">{formatCurrency(request.estimatedCost)}</p>
           </div>
           <div>
-            <p className="text-surface-500">Start Date</p>
-            <p className="text-surface-100 font-medium">{formatDate(request.startDate)}</p>
+            <p className="text-gray-400">Start Date</p>
+            <p className="text-gray-900 font-medium">{formatDate(request.startDate)}</p>
           </div>
           <div>
-            <p className="text-surface-500">End Date</p>
-            <p className="text-surface-100 font-medium">{formatDate(request.endDate)}</p>
+            <p className="text-gray-400">End Date</p>
+            <p className="text-gray-900 font-medium">{formatDate(request.endDate)}</p>
           </div>
           <div className="col-span-2">
-            <p className="text-surface-500">Purpose</p>
-            <p className="text-surface-100">{request.purpose}</p>
+            <p className="text-gray-400">Purpose</p>
+            <p className="text-gray-900">{request.purpose}</p>
           </div>
           {request.managerComment && (
             <div className="col-span-2">
-              <p className="text-surface-500">Manager Comment</p>
-              <p className="text-surface-100">{request.managerComment}</p>
+              <p className="text-gray-400">Manager Comment</p>
+              <p className="text-gray-900">{request.managerComment}</p>
             </div>
           )}
         </div>
 
         {/* Submit button for drafts */}
         {request.status === 'draft' && (
-          <div className="mt-6 pt-4 border-t border-surface-700">
+          <div className="mt-6 pt-4 border-t border-gray-200">
             <Button onClick={handleSubmit} isLoading={isSubmitting}>
               <Send className="h-4 w-4" />
               Submit for Approval
@@ -161,9 +161,9 @@ export default function TravelDetailPage() {
               <div key={i} className="flex items-start gap-3 text-sm">
                 <AlertTriangle className="h-4 w-4 text-warning-500 mt-0.5" />
                 <div>
-                  <p className="text-surface-100">{v.message}</p>
+                  <p className="text-gray-900">{v.message}</p>
                   {v.amount !== undefined && v.limit !== undefined && (
-                    <p className="text-surface-400 mt-1">
+                    <p className="text-gray-500 mt-1">
                       Amount: {formatCurrency(v.amount)} | Limit: {formatCurrency(v.limit)}
                     </p>
                   )}
@@ -181,23 +181,23 @@ export default function TravelDetailPage() {
           {request.auditLogs.map((log, i) => (
             <div key={i} className="flex gap-4 pb-4 last:pb-0">
               <div className="relative flex flex-col items-center">
-                <div className="p-2 bg-surface-700 rounded-lg">
-                  {log.action === 'created' && <Clock className="h-4 w-4 text-surface-400" />}
+                <div className="p-2 bg-gray-100 rounded-lg">
+                  {log.action === 'created' && <Clock className="h-4 w-4 text-gray-500" />}
                   {log.action === 'submitted' && <Send className="h-4 w-4 text-primary-400" />}
                   {log.action === 'approved' && <CheckCircle className="h-4 w-4 text-success-500" />}
                   {log.action === 'rejected' && <XCircle className="h-4 w-4 text-danger-500" />}
                   {!['created', 'submitted', 'approved', 'rejected'].includes(log.action) && (
-                    <User className="h-4 w-4 text-surface-400" />
+                    <User className="h-4 w-4 text-gray-500" />
                   )}
                 </div>
                 {i < request.auditLogs.length - 1 && (
-                  <div className="w-px flex-1 bg-surface-700 my-2" />
+                  <div className="w-px flex-1 bg-gray-100 my-2" />
                 )}
               </div>
               <div className="flex-1 pb-4">
-                <p className="text-sm font-medium text-surface-100 capitalize">{log.action}</p>
-                {log.note && <p className="text-sm text-surface-400 mt-1">{log.note}</p>}
-                <p className="text-xs text-surface-500 mt-1">
+                <p className="text-sm font-medium text-gray-900 capitalize">{log.action}</p>
+                {log.note && <p className="text-sm text-gray-500 mt-1">{log.note}</p>}
+                <p className="text-xs text-gray-400 mt-1">
                   {formatDateTime(log.timestamp)} • {log.actorRole}
                 </p>
               </div>

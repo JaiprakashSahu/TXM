@@ -25,11 +25,11 @@ export function ApprovalPanel({
 
     return (
         <Card>
-            <h3 className="text-lg font-semibold text-surface-100 mb-4">{title}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
             <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-surface-300 mb-1.5">
-                        Comment <span className="text-surface-500">(required for rejection)</span>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                        Comment <span className="text-gray-400">(required for rejection)</span>
                     </label>
                     <Textarea
                         placeholder="Add a comment..."
@@ -60,7 +60,7 @@ export function ApprovalPanel({
                     </Button>
                 </div>
                 {comment.trim().length === 0 && (
-                    <p className="text-xs text-surface-500">
+                    <p className="text-xs text-gray-400">
                         A comment is required to reject.
                     </p>
                 )}

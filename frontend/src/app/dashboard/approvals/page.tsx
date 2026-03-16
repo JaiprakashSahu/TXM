@@ -65,8 +65,8 @@ function ApprovalsContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-100">Pending Approvals</h1>
-        <p className="text-surface-400 mt-1">Review and approve travel requests from your team</p>
+        <h1 className="text-2xl font-bold text-gray-900">Pending Approvals</h1>
+        <p className="text-gray-500 mt-1">Review and approve travel requests from your team</p>
       </div>
 
       {error && (
@@ -78,9 +78,9 @@ function ApprovalsContent() {
       {requests.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <CheckCircle className="h-12 w-12 text-surface-500 mx-auto mb-3" />
-            <p className="text-surface-400">No pending approvals.</p>
-            <p className="text-sm text-surface-500 mt-1">All travel requests have been reviewed.</p>
+            <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+            <p className="text-gray-500">No pending approvals.</p>
+            <p className="text-sm text-gray-400 mt-1">All travel requests have been reviewed.</p>
           </div>
         </Card>
       ) : (
@@ -93,12 +93,12 @@ function ApprovalsContent() {
             return (
               <Card key={request._id}>
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-surface-700 rounded-xl">
+                  <div className="p-3 bg-gray-100 rounded-xl">
                     <User className="h-5 w-5 text-primary-400" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-surface-100">{request.destination}</h3>
+                      <h3 className="font-semibold text-gray-900">{request.destination}</h3>
                       <Badge variant="primary">Pending</Badge>
                       {request.violations.length > 0 && (
                         <Badge variant="warning">
@@ -107,10 +107,10 @@ function ApprovalsContent() {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-surface-300">
+                    <p className="text-sm text-gray-700">
                       From: {employee.name} ({employee.email})
                     </p>
-                    <div className="text-sm text-surface-400 mt-2 space-y-1">
+                    <div className="text-sm text-gray-500 mt-2 space-y-1">
                       <p>
                         {formatDate(request.startDate)} – {formatDate(request.endDate)}
                       </p>
@@ -122,7 +122,7 @@ function ApprovalsContent() {
                     {request.violations.length > 0 && (
                       <div className="mt-3 p-3 bg-warning-600/10 border border-warning-600/30 rounded-lg">
                         <p className="text-sm font-medium text-warning-500 mb-2">Policy Violations:</p>
-                        <ul className="text-sm text-surface-300 space-y-1">
+                        <ul className="text-sm text-gray-700 space-y-1">
                           {request.violations.map((v, i) => (
                             <li key={i}>• {v.message}</li>
                           ))}

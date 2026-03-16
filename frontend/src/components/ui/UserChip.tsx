@@ -28,11 +28,11 @@ export function UserChip({ name, email, size = 'md', className }: UserChipProps)
                 {initials}
             </div>
             <div className="min-w-0">
-                <p className={cn('font-medium text-surface-100 truncate', size === 'sm' ? 'text-xs' : 'text-sm')}>
+                <p className={cn('font-medium text-gray-900 truncate', size === 'sm' ? 'text-xs' : 'text-sm')}>
                     {name}
                 </p>
                 {email && (
-                    <p className={cn('text-surface-400 truncate', size === 'sm' ? 'text-[10px]' : 'text-xs')}>
+                    <p className={cn('text-gray-500 truncate', size === 'sm' ? 'text-[10px]' : 'text-xs')}>
                         {email}
                     </p>
                 )}
