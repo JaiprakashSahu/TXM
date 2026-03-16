@@ -148,14 +148,6 @@ export default function LoginPage() {
                 )}
               </div>
 
-              {/* Create account link */}
-              <p className="text-sm text-gray-500">
-                New to Traveler?{' '}
-                <span className="text-gray-900 font-semibold underline cursor-pointer">
-                  Create an Account
-                </span>
-              </p>
-
               {/* Remember me & Forgot password */}
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 cursor-pointer">
