@@ -2,10 +2,12 @@ const jwt = require('jsonwebtoken');
 const env = require('../config/env');
 const userRepository = require('../repositories/user.repository');
 const { UnauthorizedError, ForbiddenError } = require('../utils/errors');
+const logger = require('../utils/logger');
 
 const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  console.log("AUTH HEADER:", authHeader); // Debug log
+  // SECURITY: Never log auth headers or tokens - only log presence for debugging
+  logger.debug(`Auth request: ${req.method} ${req.path} - token present: ${!!authHeader}`);
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Access token required' });

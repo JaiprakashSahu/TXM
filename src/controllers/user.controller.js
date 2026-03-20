@@ -1,9 +1,9 @@
 const crypto = require('crypto');
-const bcrypt = require('bcrypt'); // Actually model handles hashing, but we need to generate a raw one? No, model hashes on save.
 const { User } = require('../models/user.model');
 const { createUserSchema } = require('../validators/user.validator');
-const { BadRequestError, ConflictError, ForbiddenError } = require('../utils/errors');
+const { BadRequestError, ConflictError, ForbiddenError, NotFoundError } = require('../utils/errors');
 const emailProvider = require('../services/emailProvider');
+const logger = require('../utils/logger');
 
 class UserController {
     async createUser(req, res) {
@@ -38,15 +38,21 @@ class UserController {
 
         await user.save();
 
-        // 4. Send Email (Mock)
+        // SECURITY: Send password only via email, never in API response
         const emailBody = `Hello ${name},\n\nYour account has been created.\n\nTemporary Password: ${tempPassword}\n\nPlease log in and change your password immediately.`;
 
-        // We don't await this to avoid blocking response? Or we should? Usually async job, but for now await is fine.
-        await emailProvider.sendEmail(email, 'Welcome to ITILITE Lite', emailBody);
+        try {
+            await emailProvider.sendEmail(email, 'Welcome to ITILITE Lite', emailBody);
+            logger.info(`Welcome email sent to ${email}`);
+        } catch (emailErr) {
+            // Log error but don't expose to client - user was created successfully
+            logger.error(`Failed to send welcome email to ${email}: ${emailErr.message}`);
+        }
 
+        // SECURITY: Never return password in API response
         res.status(201).json({
             success: true,
-            message: 'User created successfully',
+            message: 'User created successfully. Temporary password sent via email.',
             data: {
                 user: {
                     id: user._id,
@@ -54,7 +60,6 @@ class UserController {
                     email: user.email,
                     role: user.role,
                 },
-                tempPassword, // Returning for demo/testing convenience as requested
             },
         });
     }
@@ -156,10 +161,20 @@ class UserController {
         targetUser.mustChangePassword = true;
         await targetUser.save();
 
+        // SECURITY: Send password only via email, never in API response
+        const emailBody = `Hello ${targetUser.name},\n\nYour password has been reset by an administrator.\n\nNew Temporary Password: ${tempPassword}\n\nPlease log in and change your password immediately.`;
+
+        try {
+            await emailProvider.sendEmail(targetUser.email, 'Password Reset - ITILITE Lite', emailBody);
+            logger.info(`Password reset email sent to ${targetUser.email}`);
+        } catch (emailErr) {
+            logger.error(`Failed to send password reset email to ${targetUser.email}: ${emailErr.message}`);
+        }
+
+        // SECURITY: Never return password in API response
         res.json({
             success: true,
-            message: 'Password reset successful',
-            temporaryPassword: tempPassword,
+            message: 'Password reset successful. New password sent via email.',
         });
     }
 }
