@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const env = require('../config/env');
 const userRepository = require('../repositories/user.repository');
 const refreshTokenRepository = require('../repositories/refreshToken.repository');
+const loginAttemptService = require('./loginAttempt.service');
 const {
   ConflictError,
   UnauthorizedError,
@@ -34,13 +35,20 @@ class AuthService {
     return new Date(Date.now() + value * multipliers[unit]);
   }
 
-  async register({ name, email, password, role }) {
+  async register({ name, email, password }) {
     const existingUser = await userRepository.findByEmail(email);
     if (existingUser) {
       throw new ConflictError('Email already registered');
     }
 
-    const user = await userRepository.create({ name, email, password, role });
+    // SECURITY: Always force role to 'employee' regardless of input
+    // Admin/Manager roles must be assigned by existing admin via user management
+    const user = await userRepository.create({
+      name,
+      email,
+      password,
+      role: 'employee'
+    });
 
     const accessToken = this.generateAccessToken(user);
     const refreshToken = this.generateRefreshToken();
@@ -51,12 +59,25 @@ class AuthService {
       expiresAt: this.getRefreshTokenExpiry(),
     });
 
-    return { user, accessToken, refreshToken };
+    // SECURITY: Remove sensitive data from response
+    const safeUser = user.toJSON();
+    delete safeUser.password;
+
+    return { user: safeUser, accessToken, refreshToken };
   }
 
-  async login({ email, password }) {
+  async login({ email, password, ipAddress }) {
+    // SECURITY: Check if account is locked due to failed attempts
+    const { isLocked, remainingMs } = await loginAttemptService.checkLockout(email, ipAddress);
+    if (isLocked) {
+      const remainingMin = Math.ceil(remainingMs / 60000);
+      throw new ForbiddenError(`Account temporarily locked. Try again in ${remainingMin} minutes.`);
+    }
+
     const user = await userRepository.findByEmail(email, true);
     if (!user) {
+      // Record failed attempt even for non-existent user (prevents enumeration)
+      await loginAttemptService.recordFailedAttempt(email, ipAddress);
       throw new UnauthorizedError('Invalid email or password');
     }
 
@@ -66,8 +87,17 @@ class AuthService {
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      throw new UnauthorizedError('Invalid email or password');
+      // SECURITY: Record failed login attempt
+      const { shouldLock, attempts } = await loginAttemptService.recordFailedAttempt(email, ipAddress);
+      if (shouldLock) {
+        throw new ForbiddenError('Account temporarily locked due to too many failed attempts. Try again in 15 minutes.');
+      }
+      const remaining = await loginAttemptService.getRemainingAttempts(email, ipAddress);
+      throw new UnauthorizedError(`Invalid email or password. ${remaining} attempts remaining.`);
     }
+
+    // SECURITY: Reset failed attempts on successful login
+    await loginAttemptService.resetAttempts(email, ipAddress);
 
     const accessToken = this.generateAccessToken(user);
     const refreshToken = this.generateRefreshToken();

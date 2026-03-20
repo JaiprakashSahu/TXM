@@ -2,7 +2,7 @@ const { Router } = require('express');
 const expenseController = require('../controllers/expense.controller');
 const authenticate = require('../middlewares/auth.middleware');
 const authorize = require('../middlewares/roleGuard.middleware');
-const uploadReceipt = require('../middlewares/upload.middleware');
+const { uploadReceipt, validateFileContent } = require('../middlewares/upload.middleware');
 const asyncWrapper = require('../utils/asyncWrapper');
 
 const router = Router();
@@ -36,10 +36,12 @@ router.get(
 // ── Employee routes ──────────────────────────────────────────────────────────
 
 // Submit an expense with optional receipt upload
+// SECURITY: Validate file content after upload to prevent MIME type spoofing
 router.post(
   '/',
   authorize('employee', 'manager', 'admin'),
   uploadReceipt.single('receipt'),
+  validateFileContent,
   asyncWrapper((req, res) => expenseController.submit(req, res))
 );
 
