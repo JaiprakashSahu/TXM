@@ -14,7 +14,7 @@ async function runTest() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: process.env.ADMIN_EMAIL || 'admin@test.com',
-                password: process.env.ADMIN_PASSWORD || 'password123',
+                password: process.env.ADMIN_PASSWORD || 'StrongPassword123!',
             }),
         });
         const adminLogin = await adminLoginRes.json();

@@ -11,7 +11,7 @@ async function seedAdmin() {
         console.log('Connected to MongoDB');
 
         const adminEmail = process.env.ADMIN_EMAIL || 'admin@test.com';
-        const adminPassword = process.env.ADMIN_PASSWORD || 'password123';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'StrongPassword123!';
         const existingAdmin = await User.findOne({ email: adminEmail });
 
         if (existingAdmin) {
