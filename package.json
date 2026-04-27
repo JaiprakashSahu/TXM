@@ -5,7 +5,10 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,json,md,css}\"",
+    "format:write": "prettier --write \"**/*.{js,ts,tsx,json,md,css}\"",
+    "clean": "powershell -NoProfile -Command \"$paths = @('frontend/.next','frontend/out','dist','server_debug.log'); foreach ($p in $paths) { if (Test-Path $p) { Remove-Item -Recurse -Force $p } }\""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
